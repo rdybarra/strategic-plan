@@ -1,0 +1,74 @@
+<section class="step">
+  <div class="step__title" (click)="onOpen()">{{ step.name }} <i class="accent-icon fa fa-arrow-circle-o-right" aria-hidden="true"></i></div>
+
+  <div *ngIf="step.completed === false">
+    <div class="step__detail">
+
+      <div *ngFor="let item of stepDetailItems">
+        <div class="step__detail__item">
+          <div class="step__detail__item__header" [innerHTML]="item.label"></div>
+          <p>{{ step.description[item.name] }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="step.completed === true">
+    <div class="step__detail--completed">
+      <i class="step__detail__banner fa fa-trophy" aria-hidden="true"></i>
+    </div>
+  </div>
+
+</section>
+
+ <div class="view-wrapper" [class.open]="open === true" [class.editing]="editing === true">
+    <section class="view">
+      <section class="view__controls">
+        <i class="fa fa-times view__controls__close" aria-hidden="true" (click)="onClose()"></i>
+        <div *ngIf="editing === false">
+          <i class="fa fa-pencil view__controls__edit" aria-hidden="true" (click)="onEdit()"></i>
+        </div>
+        <div *ngIf="editing === true">
+          <i class="fa fa-check view__controls__save" aria-hidden="true" (click)="onSave()"></i>
+        </div>
+      </section>
+
+      <div class="step__detail__header">
+        <div class="step__detail__item__value">
+          <h2>{{ step.name }}</h2>
+        </div>
+        <div class="step__detail__item__edit-field">
+          <input type="text" [(ngModel)]="step.name" name="name" placeholder="... step name">
+        </div>
+      </div>
+
+      <div class="step__detail">
+        <div *ngFor="let item of stepDetailItems">
+          <div class="step__detail__item">
+            <div class="step__detail__item__header" [innerHTML]="item.label"></div>
+            <div class="step__detail__item__value">
+              <p>{{ step.description[item.name] }}</p>
+            </div>
+            <div class="step__detail__item__edit-field">
+              <textarea [(ngModel)]="step.description[item.name]" name="{{ item.name }}" placeholder="..."></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="center">
+        <div *ngIf="step.completed === true">
+          <button class="on-dark" (click)="onIncomplete()">Mark as incomplete</button>
+          <button class="danger" (click)="onDelete(step)">Delete</button>
+        </div>
+
+        <div *ngIf="step.completed === false">
+          <button class="on-dark" (click)="onComplete()">Mark as completed</button>
+          <button class="danger" (click)="onDelete(step)">Delete</button>
+        </div>
+
+      </div>
+    </section>
+  </div>

@@ -1,0 +1,36 @@
+<div class="plan-header" [class.editing]="editing === true">
+  <h1 class="plan-header__title">{{ plan.name }} <i class="fa fa-pencil" (click)="onEdit()"></i></h1>
+  <div class="plan-header__title--editing">
+    <input type="text" [(ngModel)]="plan.name" name="name"><i class="fa fa-check" (click)="onSave()"></i>
+  </div>
+</div>
+
+<section class="steps">
+  <section class="starting-step">
+    <!-- intentionally left blank -->
+  </section>
+
+  <section class="dynamic-steps">
+
+    <div *ngIf="steps.length === 0" class="no-steps">
+      <h2 (click)="onAddStep(index)"><i class="fa fa-plus-circle"></i>Add your first step</h2>
+    </div>
+
+    <div class="step-wrapper one-{{steps.length}}" *ngFor="let step of steps; let last = last; let index = index">
+      <sp-step [step]="step" (onDeleteStep)="onDeleteStep($event)"></sp-step>
+      <div *ngIf="last !== true">
+        <div class="add-step" (click)="onAddStep(index)">
+          <i class="fa fa-plus-circle"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-step">
+    <!-- intentionally left blank -->
+  </section>
+</section>
+
+<section class="below-steps">
+    <!-- intentionally left blank -->
+</section>

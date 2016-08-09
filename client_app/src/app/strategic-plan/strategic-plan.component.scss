@@ -1,0 +1,178 @@
+$stepGap: 3em;
+$startingStepWidth: 3.125em;
+$startingStepHeight: 25em;
+$finalStepWidth: $startingStepWidth;
+$finalStepHeight: $startingStepHeight;
+$maxEditingWidth: 37.5em;
+
+@mixin column-width($cols, $gutter) {
+  $totalGutterSpacing: (($cols - 1) * $gutter);
+  $gutterSpacingContribution: $totalGutterSpacing / ($cols);
+
+  $marginlessWidth: 100%/$cols;
+  width: calc(#{$marginlessWidth} - #{$gutterSpacingContribution});
+}
+
+:host {
+    display: block;
+}
+
+.steps,
+.dynamic-steps {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 3em;
+}
+
+.dynamic-steps {
+    /* Make room for the starting and final steps... and a little breathing room */
+    width: calc(100% - #{$startingStepWidth} - #{$finalStepWidth} - 2em);
+}
+
+.one-1 {
+  @include column-width(1, $stepGap);
+}
+
+.one-2 {
+  @include column-width(2, $stepGap);
+}
+
+.one-3 {
+  @include column-width(3, $stepGap);
+}
+
+.one-4 {
+  @include column-width(4, $stepGap);
+}
+
+.one-5 {
+  @include column-width(5, $stepGap);
+}
+
+.one-6 {
+  @include column-width(6, $stepGap);
+}
+
+.one-7 {
+  @include column-width(7, $stepGap);
+}
+
+.starting-step {
+    background: #78684E;
+    width: $startingStepWidth;
+    height: $startingStepHeight;
+    color: #ffffff;
+    border-top-right-radius: 10px;
+
+    &:before {
+        display: block;
+        content: ' ';
+        width: 40px;
+        height: 50px;
+        background-image: url('/img/stick-running.svg');
+        background-size: cover;
+        position: relative;
+        top: -32px;
+        left: 18px;
+    }
+}
+
+.final-step {
+    border-top-left-radius: 10px;
+    background: #798616;
+    width: $finalStepWidth;
+    height: $finalStepHeight;
+}
+
+.below-steps {
+    background: darken(#78684E, 20);
+    height: 2em;
+}
+
+.step-wrapper {
+    position: relative;
+}
+
+.add-step {
+    text-align: center;
+    position: absolute;
+    right: -$stepGap;
+    width: $stepGap;
+    top: 10em;
+    cursor: pointer;
+    padding: 1em 0;
+    transition: all 0.3s ease;
+    opacity: 0.3;
+
+    &:hover {
+        opacity: 1;
+    }
+
+}
+
+.no-steps {
+    height: 0.75 * $startingStepHeight;
+    text-align: center;
+    width: 100%;
+
+    h2 {
+        cursor: pointer;
+        display: inline-block;
+    }
+}
+
+.plan-header {
+    max-width: $maxEditingWidth;
+    margin: 0 auto;
+
+    &__title {
+        text-align: center;
+
+        i {
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__title--editing {
+        display: none;
+        width: 100%;
+
+        /* Match H1 styles */
+        font-size: 2em;
+        font-family: 'Lora', serif;
+        font-weight: bold;
+        margin: 0.67em auto;
+
+        i {
+            display: inline-block;
+            cursor: pointer;
+            width: 1.5em;
+            text-align: center;
+        }
+
+        input {
+            /* Leave room for the "save" icon */
+            width: calc(100% - 2em);
+            max-width: 550px;
+        }
+    }
+
+    &.editing {
+        .plan-header__title {
+            display: none;
+        }
+
+        .plan-header__title--editing {
+            display: block;
+        }
+    }
+}
