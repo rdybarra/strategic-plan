@@ -1,15 +1,11 @@
-import { enableProdMode } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { AppComponent } from './app/app.component';
-import { APP_ROUTER_PROVIDERS } from './app/app.routes';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+// import { enableProdMode } from '@angular/core';
 
-if (process.env.ENV === 'build') {
-  enableProdMode();
-}
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule }              from './app/app.module';
 
-bootstrap(AppComponent, [
-  // Dependencies go here!
-  APP_ROUTER_PROVIDERS,
-  {provide: LocationStrategy, useClass: HashLocationStrategy}
-]).catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule);
+
+// if (process.env.ENV === 'build') {
+//   enableProdMode();
+// }
+
