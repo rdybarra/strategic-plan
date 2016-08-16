@@ -29,7 +29,7 @@ export class StrategicPlanComponent implements OnInit {
   }
 
   onAddStep(index: number) {
-    let step = new Step();
+    let step = new Step(this.plan.id);
     this.steps.splice(index + 1, 0, step);
   }
 

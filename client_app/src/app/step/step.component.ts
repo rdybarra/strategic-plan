@@ -49,9 +49,8 @@ export class StepComponent implements OnInit {
 
   onSave() {
     this.editing = false;
-    this.strategicPlanService.updateStep(this.step).then(step => {
-      this.step = step;
-    });
+
+    return this.step.id ? this.saveUpdatedStep() : this.saveNewStep();
   }
 
   onDelete(step: Step) {
@@ -63,11 +62,26 @@ export class StepComponent implements OnInit {
 
   onComplete() {
     this.step.completed = true;
+    this.onSave();
     this.onClose();
   }
 
   onIncomplete() {
     this.step.completed = false;
+    this.onSave();
     this.onClose();
+  }
+
+  private saveUpdatedStep() {
+    return this.strategicPlanService.updateStep(this.step).then(step => {
+      this.step = step;
+    });
+  }
+
+  private saveNewStep() {
+    console.log(JSON.stringify(this.step));
+    return this.strategicPlanService.createStep(this.step).then(step => {
+      this.step = step;
+    });
   }
 }

@@ -17,10 +17,7 @@ router.get('/:stepId', function getStepRoute(req, res, next) {
 });
 
 router.post('/', function postStepRoute(req, res, next) {
-  let step = new Step({
-    name: req.body.name,
-    planId: req.params.planId
-  });
+  let step = new Step(req.body);
 
   step.save().then(function saveStepDbCallback(step) {
     res.json(step);

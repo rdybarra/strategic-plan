@@ -56127,7 +56127,7 @@
 	        this.editing = false;
 	    };
 	    StrategicPlanComponent.prototype.onAddStep = function (index) {
-	        var step = new step_1.Step();
+	        var step = new step_1.Step(this.plan.id);
 	        this.steps.splice(index + 1, 0, step);
 	    };
 	    StrategicPlanComponent.prototype.onDeleteStep = function (step) {
@@ -56209,11 +56209,8 @@
 	        this.editing = true;
 	    };
 	    StepComponent.prototype.onSave = function () {
-	        var _this = this;
 	        this.editing = false;
-	        this.strategicPlanService.updateStep(this.step).then(function (step) {
-	            _this.step = step;
-	        });
+	        return this.step.id ? this.saveUpdatedStep() : this.saveNewStep();
 	    };
 	    StepComponent.prototype.onDelete = function (step) {
 	        var _this = this;
@@ -56224,11 +56221,26 @@
 	    };
 	    StepComponent.prototype.onComplete = function () {
 	        this.step.completed = true;
+	        this.onSave();
 	        this.onClose();
 	    };
 	    StepComponent.prototype.onIncomplete = function () {
 	        this.step.completed = false;
+	        this.onSave();
 	        this.onClose();
+	    };
+	    StepComponent.prototype.saveUpdatedStep = function () {
+	        var _this = this;
+	        return this.strategicPlanService.updateStep(this.step).then(function (step) {
+	            _this.step = step;
+	        });
+	    };
+	    StepComponent.prototype.saveNewStep = function () {
+	        var _this = this;
+	        console.log(JSON.stringify(this.step));
+	        return this.strategicPlanService.createStep(this.step).then(function (step) {
+	            _this.step = step;
+	        });
 	    };
 	    __decorate([
 	        core_1.Input(), 
@@ -56257,7 +56269,8 @@
 
 	"use strict";
 	var Step = (function () {
-	    function Step() {
+	    function Step(planId) {
+	        this.planId = planId;
 	        this.name = '';
 	        this.description = {
 	            description: '',
@@ -64916,6 +64929,13 @@
 	    };
 	    StrategicPlanService.prototype.getPlan = function (id) {
 	        return this.http.get(this.apiEndpoint + '/' + id)
+	            .toPromise()
+	            .then(function (response) {
+	            return response.json();
+	        });
+	    };
+	    StrategicPlanService.prototype.createStep = function (step) {
+	        return this.http.post(this.apiEndpoint + '/' + step.planId + '/steps/', step)
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
