@@ -1,8 +1,9 @@
 export class Step {
-  id: number;
+  id: string;
   name: string;
   description: {};
   completed: boolean;
+  planId: string;
 
   constructor() {
     this.name = '';

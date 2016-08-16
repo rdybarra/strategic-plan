@@ -8,7 +8,7 @@ import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'plan', component: StrategicPlanComponent },
+  { path: 'plans/:id', component: StrategicPlanComponent },
   { path: 'plans', component: StrategicPlanListComponent }
 ];
 

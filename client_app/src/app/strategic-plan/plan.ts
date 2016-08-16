@@ -1,6 +1,9 @@
+import { Step } from '../step/step';
+
 export class Plan {
-  id: number;
+  id: string;
   name: string;
+  steps: Step[];
 
   constructor() {
     this.name = '';

@@ -1,3 +1,7 @@
-<div>
-this is my list.
+<div class="container">
+    <table>
+      <tr *ngFor="let plan of plans">
+        <td><a routerLink="/plans/{{ plan.id }}">{{ plan.name }}</a></td>
+      </tr>
+    </table>
 </div>

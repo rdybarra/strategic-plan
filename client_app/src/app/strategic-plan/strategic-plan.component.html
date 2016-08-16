@@ -1,3 +1,5 @@
+<div *ngIf="plan">
+
 <div class="plan-header" [class.editing]="editing === true">
   <h1 class="plan-header__title">{{ plan.name }} <i class="fa fa-pencil" (click)="onEdit()"></i></h1>
   <div class="plan-header__title--editing">
@@ -30,6 +32,8 @@
     <!-- intentionally left blank -->
   </section>
 </section>
+
+</div>
 
 <section class="below-steps">
     <!-- intentionally left blank -->

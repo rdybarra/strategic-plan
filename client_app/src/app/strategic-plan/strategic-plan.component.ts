@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StepComponent } from '../step/step.component';
 import { Step } from '../step/step';
-import { STEPS } from '../step/mock-steps';
-import { PLAN } from './mock-plan';
+
+import { ActivatedRoute, Params } from '@angular/router';
+
+import { Plan } from './plan';
+import { StrategicPlanService } from '../shared/strategic-plan.service';
 
 @Component({
   selector: 'my-home',
@@ -11,9 +14,11 @@ import { PLAN } from './mock-plan';
   directives: [StepComponent]
 })
 export class StrategicPlanComponent implements OnInit {
-  public steps = STEPS;
-  plan = PLAN;
+  private steps = [];
+  private plan: Plan;
   editing: boolean;
+
+  constructor(private strategicPlanService: StrategicPlanService, private route: ActivatedRoute) { }
 
   onEdit() {
     this.editing = true;
@@ -37,6 +42,14 @@ export class StrategicPlanComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Hello strategic plan');
+    this.route.params.forEach((params: Params) => {
+      if (params['id'] !== undefined) {
+        let id = params['id'];
+        this.strategicPlanService.getPlan(id).then(plan => {
+          this.plan = plan;
+          this.steps = plan.steps;
+        });
+      }
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Step } from './step';
 import { StepDetailItem } from './step-detail-item';
+import { StrategicPlanService } from '../shared/strategic-plan.service';
 
 @Component({
   selector: 'sp-step',
@@ -14,7 +15,7 @@ export class StepComponent implements OnInit {
   editing: boolean;
   stepDetailItems: StepDetailItem[];
 
-  constructor() {
+  constructor(private strategicPlanService: StrategicPlanService) {
     this.open = false;
     this.editing = false;
     this.stepDetailItems = [];
@@ -48,11 +49,16 @@ export class StepComponent implements OnInit {
 
   onSave() {
     this.editing = false;
+    this.strategicPlanService.updateStep(this.step).then(step => {
+      this.step = step;
+    });
   }
 
   onDelete(step: Step) {
-    this.onDeleteStep.emit(step);
-    this.onClose();
+    this.strategicPlanService.deleteStep(this.step).then(step => {
+      this.onDeleteStep.emit(step);
+      this.onClose();
+    });
   }
 
   onComplete() {

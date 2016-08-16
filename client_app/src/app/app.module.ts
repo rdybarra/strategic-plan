@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { StrategicPlanComponent } from './strategic-plan/strategic-plan.component';
 import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan-list.component';
+import { StrategicPlanService } from './shared/strategic-plan.service';
 
 @NgModule({
     declarations: [
@@ -20,10 +22,12 @@ import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan
     imports: [
       BrowserModule,
       FormsModule,
-      routing
+      routing,
+      HttpModule
     ],
     providers: [
-      appRoutingProviders
+      appRoutingProviders,
+      StrategicPlanService
     ],
     bootstrap: [AppComponent],
 })
