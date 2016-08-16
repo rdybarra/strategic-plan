@@ -29,7 +29,7 @@ $maxEditingWidth: 37.5em;
 
 .dynamic-steps {
     /* Make room for the starting and final steps... and a little breathing room */
-    width: calc(100% - #{$startingStepWidth} - #{$finalStepWidth} - 2em);
+    width: calc(100% - #{$startingStepWidth} - #{$finalStepWidth} - (2 * #{$stepGap}));
 }
 
 .one-1 {
@@ -110,7 +110,12 @@ $maxEditingWidth: 37.5em;
     &:hover {
         opacity: 1;
     }
+}
 
+.add-first-step {
+    @extend .add-step;
+    left: -$stepGap;
+    right: auto;
 }
 
 .no-steps {

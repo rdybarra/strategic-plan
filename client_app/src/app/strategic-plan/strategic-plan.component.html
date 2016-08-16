@@ -18,12 +18,17 @@
       <h2 (click)="onAddStep(index)"><i class="fa fa-plus-circle"></i>Add your first step</h2>
     </div>
 
-    <div class="step-wrapper one-{{steps.length}}" *ngFor="let step of steps; let last = last; let index = index">
-      <sp-step [step]="step" (onDeleteStep)="onDeleteStep($event)"></sp-step>
-      <div *ngIf="last !== true">
-        <div class="add-step" (click)="onAddStep(index)">
+    <div class="step-wrapper one-{{steps.length}}" *ngFor="let step of steps; let first = first; let index = index">
+
+      <div *ngIf="first == true">
+        <div class="add-first-step" (click)="onAddStep(-1)">
           <i class="fa fa-plus-circle"></i>
         </div>
+      </div>
+
+      <sp-step [step]="step" (onDeleteStep)="onDeleteStep($event)"></sp-step>
+      <div class="add-step" (click)="onAddStep(index)">
+        <i class="fa fa-plus-circle"></i>
       </div>
     </div>
   </section>
