@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  padding-bottom: 3em;
+}
+
+table {
+  font-size: 1.2em;
+  margin: 3em 0;
+  table-layout: fixed;
+  width: 100%;
+
+  tr {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  td {
+    padding: 0.5em 0;
+  }
+
+  a {
+    cursor: pointer;
+
+    &.icon {
+      transition: all 0.3s ease;
+      opacity: 0.3;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &.danger {
+
+      &:hover {
+        color: #ff0000;
+      }
+    }
+  }
+}

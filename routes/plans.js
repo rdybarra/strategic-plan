@@ -41,8 +41,8 @@ router.patch('/:planId', function patchPlanRoute(req, res, next) {
 });
 
 router.delete('/:planId', function deletePlanRoute(req, res, next) {
-  Plan.get(req.params.planId).then(function getPlanDbCallback(plan) {
-    plan.delete().then(function deletePlanDbCallback(deletedPlan) {
+  Plan.get(req.params.planId).getJoin().then(function getPlanDbCallback(plan) {
+    plan.deleteAll().then(function deletePlanDbCallback(deletedPlan) {
       res.json(deletedPlan);
     }).catch(next);
   }).catch(next);

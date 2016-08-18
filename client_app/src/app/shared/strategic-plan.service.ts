@@ -28,8 +28,26 @@ export class StrategicPlanService {
                });
   }
 
+  createPlan() {
+    const plan = new Plan('Untitled');
+
+    return this.http.post(this.apiEndpoint, plan)
+               .toPromise()
+               .then(response => {
+                 return response.json() as Plan;
+               });
+  }
+
   updatePlan(plan: Plan) {
     return this.http.patch(this.apiEndpoint + '/' + plan.id, plan)
+               .toPromise()
+               .then(response => {
+                 return response.json() as Plan;
+               });
+  }
+
+  deletePlan(plan: Plan) {
+    return this.http.delete(this.apiEndpoint + '/' + plan.id)
                .toPromise()
                .then(response => {
                  return response.json() as Plan;

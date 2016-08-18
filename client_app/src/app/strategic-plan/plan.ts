@@ -5,7 +5,7 @@ export class Plan {
   name: string;
   steps: Step[];
 
-  constructor() {
-    this.name = '';
+  constructor(name: string) {
+    this.name = name;
   }
 }

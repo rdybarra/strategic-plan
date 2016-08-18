@@ -1,7 +1,13 @@
 <div class="container">
-    <table>
-      <tr *ngFor="let plan of plans">
-        <td><a routerLink="/plans/{{ plan.id }}">{{ plan.name }}</a></td>
-      </tr>
-    </table>
+  <button (click)="onCreate()">Create a new Plan</button>
+
+  <table>
+    <tr *ngFor="let plan of plans">
+      <td><a routerLink="/plans/{{ plan.id }}">{{ plan.name }}</a></td>
+      <td>
+        <a class="icon" routerLink="/plans/{{ plan.id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        <a class="icon danger" (click)="onDelete(plan)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </table>
 </div>
