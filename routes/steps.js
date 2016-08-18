@@ -3,9 +3,10 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 const Step = require('../models/step');
+const stepHelper = require('../models/step-helper');
 
 router.get('/', function allStepsRoute(req, res, next) {
-  Step.filter({ planId: req.params.planId }).run().then(function allStepsDbCallback(steps) {
+  Step.filter({ planId: req.params.planId }).orderBy('order').run().then(function allStepsDbCallback(steps) {
     res.json(steps);
   }).catch(next);
 });
@@ -18,16 +19,19 @@ router.get('/:stepId', function getStepRoute(req, res, next) {
 
 router.post('/', function postStepRoute(req, res, next) {
   let step = new Step(req.body);
-
   step.save().then(function saveStepDbCallback(step) {
-    res.json(step);
+    stepHelper.adjustOtherStepOrders(step).then(() => {
+      res.json(step);
+    }).catch(next);
   }).catch(next);
 });
 
 router.patch('/:stepId', function patchStepRoute(req, res, next) {
   Step.get(req.params.stepId).run().then(function patchStepDbCallback(step) {
     step.merge(req.body).save().then(function saveStepDbCallback(updatedStep) {
-      res.json(updatedStep);
+      stepHelper.adjustOtherStepOrders(updatedStep).then(() => {
+        res.json(updatedStep);
+      }).catch(next);
     }).catch(next);
   });
 });

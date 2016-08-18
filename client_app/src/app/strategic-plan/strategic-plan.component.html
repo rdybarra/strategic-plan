@@ -15,7 +15,7 @@
   <section class="dynamic-steps">
 
     <div *ngIf="steps.length === 0" class="no-steps">
-      <h2 (click)="onAddStep(index)"><i class="fa fa-plus-circle"></i>Add your first step</h2>
+      <h2 (click)="onAddStep(-1)"><i class="fa fa-plus-circle"></i>Add your first step</h2>
     </div>
 
     <div class="step-wrapper one-{{steps.length}}" *ngFor="let step of steps; let first = first; let index = index">

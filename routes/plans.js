@@ -21,7 +21,13 @@ router.post('/', function postPlanRoute(req, res, next) {
 });
 
 router.get('/:planId', function getPlanRoute(req, res, next) {
-  Plan.get(req.params.planId).getJoin().run().then(function getPlanDbCallback(plan) {
+  Plan.get(req.params.planId).getJoin({
+    steps: {
+      _apply: function(sequence) {
+        return sequence.orderBy('order');
+      }
+    }
+  }).run().then(function getPlanDbCallback(plan) {
     res.json(plan);
   }).catch(next);
 });

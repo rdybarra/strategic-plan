@@ -4,7 +4,7 @@ export class Step {
   description: {};
   completed: boolean;
 
-  constructor(public planId: string) {
+  constructor(public planId: string, public order: number) {
     this.name = '';
     this.description = {
       description: '',
