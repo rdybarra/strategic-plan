@@ -20,7 +20,7 @@ router.get('/:stepId', function getStepRoute(req, res, next) {
 router.post('/', function postStepRoute(req, res, next) {
   let step = new Step(req.body);
   step.save().then(function saveStepDbCallback(step) {
-    stepHelper.adjustOtherStepOrders(step).then(() => {
+    stepHelper.incrementSubsequentStepOrders(step).then(() => {
       res.json(step);
     }).catch(next);
   }).catch(next);
@@ -29,7 +29,7 @@ router.post('/', function postStepRoute(req, res, next) {
 router.patch('/:stepId', function patchStepRoute(req, res, next) {
   Step.get(req.params.stepId).run().then(function patchStepDbCallback(step) {
     step.merge(req.body).save().then(function saveStepDbCallback(updatedStep) {
-      stepHelper.adjustOtherStepOrders(updatedStep).then(() => {
+      stepHelper.incrementSubsequentStepOrders(updatedStep).then(() => {
         res.json(updatedStep);
       }).catch(next);
     }).catch(next);
@@ -39,7 +39,9 @@ router.patch('/:stepId', function patchStepRoute(req, res, next) {
 router.delete('/:stepId', function deleteStepRoute(req, res, next) {
   Step.get(req.params.stepId).then(function getStepDbCallback(step) {
     step.delete().then(function deleteStepDbCallback(deletedStep) {
-      res.json(deletedStep);
+      stepHelper.decrementSubsequentStepOrders(deletedStep).then(() => {
+        res.json(deletedStep);
+      }).catch(next);
     }).catch(next);
   }).catch(next);
 });

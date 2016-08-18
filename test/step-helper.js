@@ -41,7 +41,7 @@ describe('step-helper', function describeStepHelper() {
     });
   });
 
-  describe('adjustOtherStepOrders', function describeAdjustOtherStepOrders() {
+  describe('incrementSubsequentStepOrders', function describeIncrementSubsequentStepOrders() {
     it('should adjust sibling step orders to allow step placed in beginning', function(done) {
       let newStep = new Step({
         name: 'new',
@@ -49,8 +49,10 @@ describe('step-helper', function describeStepHelper() {
         order: 0
       });
 
-      stepHelper.adjustOtherStepOrders(newStep).then(() => {
+      stepHelper.incrementSubsequentStepOrders(newStep).then(() => {
         Step.filter({ planId: '1'}).orderBy('order').run().then((steps) => {
+          // Note that the newStep was never actually inserted, though it would have the order
+          // value of 0.
           expect(steps[0].order).to.equal(1);
           expect(steps[1].order).to.equal(2);
 
@@ -66,7 +68,7 @@ describe('step-helper', function describeStepHelper() {
         order: 2
       });
 
-      stepHelper.adjustOtherStepOrders(newStep).then(() => {
+      stepHelper.incrementSubsequentStepOrders(newStep).then(() => {
         Step.filter({ planId: '1'}).orderBy('order').run().then((steps) => {
           expect(steps[0].order).to.equal(0);
           expect(steps[1].order).to.equal(1);
@@ -83,8 +85,10 @@ describe('step-helper', function describeStepHelper() {
         order: 1
       });
 
-      stepHelper.adjustOtherStepOrders(newStep).then(() => {
+      stepHelper.incrementSubsequentStepOrders(newStep).then(() => {
         Step.filter({ planId: '1'}).orderBy('order').run().then((steps) => {
+          // Note that the newStep was never actually inserted, though it would have the order
+          // value of 1.
           expect(steps[0].order).to.equal(0);
           expect(steps[1].order).to.equal(2);
 
@@ -94,4 +98,24 @@ describe('step-helper', function describeStepHelper() {
     });
   });
 
+  describe('decrementSubsequentStepOrders', function describeDecrementSubsequentStepOrders() {
+    it('should decrement all sibling step orders after the reference step order', function(done) {
+
+      let lastStep = new Step({
+        name: 'Last',
+        planId: '1',
+        order: 1
+      });
+
+      stepHelper.decrementSubsequentStepOrders(lastStep).then(() => {
+        Step.filter({ planId: '1'}).orderBy('order').run().then((steps) => {
+          // Note that the lastStep was never actually delete, which is why there are two 0's.
+          expect(steps[0].order).to.equal(0);
+          expect(steps[1].order).to.equal(0);
+
+          done();
+        }).catch(done);
+      }).catch(done);
+    });
+  });
 });
