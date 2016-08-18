@@ -28,6 +28,14 @@ export class StrategicPlanService {
                });
   }
 
+  updatePlan(plan: Plan) {
+    return this.http.patch(this.apiEndpoint + '/' + plan.id, plan)
+               .toPromise()
+               .then(response => {
+                 return response.json() as Plan;
+               });
+  }
+
   createStep(step: Step) {
     return this.http.post(this.apiEndpoint + '/' + step.planId + '/steps/', step)
                .toPromise()

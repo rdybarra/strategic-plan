@@ -26,10 +26,11 @@ export class StrategicPlanComponent implements OnInit {
 
   onSave() {
     this.editing = false;
+    this.strategicPlanService.updatePlan(this.plan);
   }
 
   onAddStep(index: number) {
-    let step = new Step(this.plan.id);
+    let step = new Step(this.plan.id, index + 1);
     this.steps.splice(index + 1, 0, step);
   }
 
