@@ -54,10 +54,12 @@ export class StepComponent implements OnInit {
   }
 
   onDelete(step: Step) {
-    this.strategicPlanService.deleteStep(this.step).then(step => {
-      this.onDeleteStep.emit(step);
-      this.onClose();
-    });
+    if (confirm('Are you sure you want to delete this step?')) {
+      this.strategicPlanService.deleteStep(this.step).then(step => {
+        this.onDeleteStep.emit(step);
+        this.onClose();
+      });
+    }
   }
 
   onComplete() {

@@ -24,9 +24,11 @@ export class StrategicPlanListComponent implements OnInit {
   }
 
   onDelete(plan: Plan) {
-    this.strategicPlanService.deletePlan(plan).then(() => {
-      this.loadPlans();
-    });
+    if (confirm('Are you sure you want to delete this plan?')) {
+      this.strategicPlanService.deletePlan(plan).then(() => {
+        this.loadPlans();
+      });
+    }
   }
 
   ngOnInit() {

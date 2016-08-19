@@ -56215,10 +56215,12 @@
 	    };
 	    StepComponent.prototype.onDelete = function (step) {
 	        var _this = this;
-	        this.strategicPlanService.deleteStep(this.step).then(function (step) {
-	            _this.onDeleteStep.emit(step);
-	            _this.onClose();
-	        });
+	        if (confirm('Are you sure you want to delete this step?')) {
+	            this.strategicPlanService.deleteStep(this.step).then(function (step) {
+	                _this.onDeleteStep.emit(step);
+	                _this.onClose();
+	            });
+	        }
 	    };
 	    StepComponent.prototype.onComplete = function () {
 	        this.step.completed = true;
@@ -59675,9 +59677,11 @@
 	    };
 	    StrategicPlanListComponent.prototype.onDelete = function (plan) {
 	        var _this = this;
-	        this.strategicPlanService.deletePlan(plan).then(function () {
-	            _this.loadPlans();
-	        });
+	        if (confirm('Are you sure you want to delete this plan?')) {
+	            this.strategicPlanService.deletePlan(plan).then(function () {
+	                _this.loadPlans();
+	            });
+	        }
 	    };
 	    StrategicPlanListComponent.prototype.ngOnInit = function () {
 	        this.loadPlans();
