@@ -49958,13 +49958,13 @@
 	var core_1 = __webpack_require__(11);
 	var platform_browser_1 = __webpack_require__(203);
 	var app_routing_1 = __webpack_require__(338);
-	var forms_1 = __webpack_require__(441);
+	var forms_1 = __webpack_require__(443);
 	var http_1 = __webpack_require__(413);
-	var app_component_1 = __webpack_require__(479);
+	var app_component_1 = __webpack_require__(481);
 	var home_1 = __webpack_require__(400);
 	var about_1 = __webpack_require__(404);
 	var strategic_plan_component_1 = __webpack_require__(408);
-	var strategic_plan_list_component_1 = __webpack_require__(439);
+	var strategic_plan_list_component_1 = __webpack_require__(440);
 	var strategic_plan_service_1 = __webpack_require__(412);
 	var AppModule = (function () {
 	    function AppModule() {
@@ -50006,7 +50006,7 @@
 	var home_1 = __webpack_require__(400);
 	var about_1 = __webpack_require__(404);
 	var strategic_plan_component_1 = __webpack_require__(408);
-	var strategic_plan_list_component_1 = __webpack_require__(439);
+	var strategic_plan_list_component_1 = __webpack_require__(440);
 	exports.appRoutes = [
 	    { path: '', component: home_1.HomeComponent },
 	    { path: 'about', component: about_1.AboutComponent },
@@ -56152,8 +56152,8 @@
 	    StrategicPlanComponent = __decorate([
 	        core_1.Component({
 	            selector: 'my-home',
-	            template: __webpack_require__(437),
-	            styles: [__webpack_require__(438)],
+	            template: __webpack_require__(438),
+	            styles: [__webpack_require__(439)],
 	            directives: [step_component_1.StepComponent]
 	        }), 
 	        __metadata('design:paramtypes', [strategic_plan_service_1.StrategicPlanService, router_1.ActivatedRoute])
@@ -56256,8 +56256,8 @@
 	    StepComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sp-step',
-	            template: __webpack_require__(435),
-	            styles: [__webpack_require__(436)]
+	            template: __webpack_require__(436),
+	            styles: [__webpack_require__(437)]
 	        }), 
 	        __metadata('design:paramtypes', [strategic_plan_service_1.StrategicPlanService])
 	    ], StepComponent);
@@ -56346,7 +56346,7 @@
 	var core_1 = __webpack_require__(11);
 	var http_1 = __webpack_require__(413);
 	__webpack_require__(391);
-	var plan_1 = __webpack_require__(1030);
+	var plan_1 = __webpack_require__(435);
 	var StrategicPlanService = (function () {
 	    function StrategicPlanService(http) {
 	        this.http = http;
@@ -59624,28 +59624,42 @@
 /* 435 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"step\">\n  <div class=\"step__title\" (click)=\"onOpen()\">{{ step.name }} <i class=\"accent-icon fa fa-arrow-circle-o-right\" aria-hidden=\"true\"></i></div>\n\n  <div *ngIf=\"step.completed === false\">\n    <div class=\"step__detail\">\n\n      <div *ngFor=\"let item of stepDetailItems\">\n        <div class=\"step__detail__item\">\n          <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n          <p>{{ step.description[item.name] }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"step.completed === true\">\n    <div class=\"step__detail--completed\">\n      <i class=\"step__detail__banner fa fa-trophy\" aria-hidden=\"true\"></i>\n    </div>\n  </div>\n\n</section>\n\n <div class=\"view-wrapper\" [class.open]=\"open === true\" [class.editing]=\"editing === true\">\n    <section class=\"view\">\n      <section class=\"view__controls\">\n        <i class=\"fa fa-times view__controls__close\" aria-hidden=\"true\" (click)=\"onClose()\"></i>\n        <div *ngIf=\"editing === false\">\n          <i class=\"fa fa-pencil view__controls__edit\" aria-hidden=\"true\" (click)=\"onEdit()\"></i>\n        </div>\n        <div *ngIf=\"editing === true\">\n          <i class=\"fa fa-check view__controls__save\" aria-hidden=\"true\" (click)=\"onSave()\"></i>\n        </div>\n      </section>\n\n      <div class=\"step__detail__header\">\n        <div class=\"step__detail__item__value\">\n          <h2>{{ step.name }}</h2>\n        </div>\n        <div class=\"step__detail__item__edit-field\">\n          <input type=\"text\" [(ngModel)]=\"step.name\" name=\"name\" placeholder=\"... step name\">\n        </div>\n      </div>\n\n      <div class=\"step__detail\">\n        <div *ngFor=\"let item of stepDetailItems\">\n          <div class=\"step__detail__item\">\n            <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n            <div class=\"step__detail__item__value\">\n              <p>{{ step.description[item.name] }}</p>\n            </div>\n            <div class=\"step__detail__item__edit-field\">\n              <textarea [(ngModel)]=\"step.description[item.name]\" name=\"{{ item.name }}\" placeholder=\"...\"></textarea>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class=\"center\">\n        <div *ngIf=\"step.completed === true\">\n          <button class=\"on-dark\" (click)=\"onIncomplete()\">Mark as incomplete</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n        <div *ngIf=\"step.completed === false\">\n          <button class=\"on-dark\" (click)=\"onComplete()\">Mark as completed</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n      </div>\n    </section>\n  </div>\n"
+	"use strict";
+	var Plan = (function () {
+	    function Plan(name) {
+	        this.name = name;
+	    }
+	    return Plan;
+	}());
+	exports.Plan = Plan;
+
 
 /***/ },
 /* 436 */
 /***/ function(module, exports) {
 
-	module.exports = ":host {\n  display: block; }\n\n.step__title {\n  text-align: center;\n  cursor: pointer;\n  font-family: \"Indie Flower\", cursive;\n  font-size: 1.375em;\n  line-height: 1.3em; }\n  .step__title .accent-icon {\n    opacity: 0.3;\n    transition: all 0.3s ease; }\n  .step__title:hover .accent-icon {\n    opacity: 1; }\n\n.step__detail, .step__detail--completed {\n  padding: 1em;\n  height: 25em;\n  overflow-y: scroll;\n  position: relative;\n  border: 5px solid #DDDABE;\n  border-bottom: 0;\n  border-radius: 10px 10px 0 0;\n  min-width: 120px;\n  min-height: 200px; }\n  .step__detail--completed {\n    background-color: #DDDABE;\n    overflow: visible; }\n  .step__detail .step__detail__banner, .step__detail--completed .step__detail__banner {\n    display: block;\n    font-size: 4em;\n    text-align: center;\n    padding-top: 2em;\n    text-align: center; }\n\n.step__detail__item {\n  margin-bottom: 1em; }\n  .step__detail__item p {\n    font-family: \"Indie Flower\", cursive; }\n\n.step__detail__item__header {\n  font-size: 1.4em; }\n\n.view-wrapper {\n  display: none;\n  width: 100%;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  left: 0;\n  top: 0;\n  z-index: 8; }\n  .view-wrapper.open {\n    display: block; }\n  .view-wrapper.editing .step__detail__item__value {\n    display: none !important; }\n  .view-wrapper.editing .step__detail__item__edit-field {\n    display: block !important; }\n\n.view {\n  position: fixed;\n  padding: 3em;\n  height: calc(100vh - 6em);\n  overflow-y: scroll;\n  width: calc(100% - 6em);\n  top: 0;\n  left: 0;\n  z-index: 9;\n  color: #ffffff; }\n  .view .view__controls {\n    position: fixed;\n    right: 1em;\n    top: 1em;\n    font-size: 1.5em; }\n    .view .view__controls i {\n      display: block;\n      width: 1.5em;\n      text-align: center;\n      cursor: pointer;\n      margin-bottom: 0.3em; }\n  .view .step__detail__header {\n    text-align: center;\n    padding-bottom: 1em;\n    border-bottom: 1px solid #ffffff;\n    margin-bottom: 2em; }\n    .view .step__detail__header input {\n      max-width: 37.5em;\n      width: 100%;\n      font-family: \"Lora\", serif;\n      font-weight: bold;\n      font-size: 1.5em;\n      text-align: center;\n      background: transparent;\n      border: 1px solid rgba(255, 255, 255, 0.2);\n      padding: 1em;\n      color: #ffffff; }\n  .view .step__detail, .view .step__detail--completed {\n    overflow: visible;\n    height: auto;\n    border: 0; }\n    .view .step__detail .step__detail__item, .view .step__detail--completed .step__detail__item {\n      margin-bottom: 5em;\n      text-align: center; }\n    .view .step__detail .step__detail__item__header, .view .step__detail--completed .step__detail__item__header {\n      padding-bottom: 0.5em;\n      border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n      margin-bottom: 1em; }\n\n.step__detail__item__value {\n  max-width: 37.5em;\n  margin: 0 auto;\n  font-size: 1.3em;\n  color: #cccccc; }\n\n.step__detail__item__edit-field {\n  display: none;\n  max-width: calc(37.5em + 2em);\n  margin: 0 auto;\n  font-size: 1.3em; }\n  .step__detail__item__edit-field textarea {\n    text-align: center;\n    width: 100%;\n    color: #cccccc;\n    background: transparent;\n    min-height: 2em;\n    padding: 1em;\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    font-family: \"Indie Flower\", cursive; }\n"
+	module.exports = "<section class=\"step\">\n  <div class=\"step__title\" (click)=\"onOpen()\">{{ step.name }} <i class=\"accent-icon fa fa-arrow-circle-o-right\" aria-hidden=\"true\"></i></div>\n\n  <div *ngIf=\"step.completed === false\">\n    <div class=\"step__detail\">\n\n      <div *ngFor=\"let item of stepDetailItems\">\n        <div class=\"step__detail__item\">\n          <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n          <p>{{ step.description[item.name] }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"step.completed === true\">\n    <div class=\"step__detail--completed\">\n      <i class=\"step__detail__banner fa fa-trophy\" aria-hidden=\"true\"></i>\n    </div>\n  </div>\n\n</section>\n\n <div class=\"view-wrapper\" [class.open]=\"open === true\" [class.editing]=\"editing === true\">\n    <section class=\"view\">\n      <section class=\"view__controls\">\n        <i class=\"fa fa-times view__controls__close\" aria-hidden=\"true\" (click)=\"onClose()\"></i>\n        <div *ngIf=\"editing === false\">\n          <i class=\"fa fa-pencil view__controls__edit\" aria-hidden=\"true\" (click)=\"onEdit()\"></i>\n        </div>\n        <div *ngIf=\"editing === true\">\n          <i class=\"fa fa-check view__controls__save\" aria-hidden=\"true\" (click)=\"onSave()\"></i>\n        </div>\n      </section>\n\n      <div class=\"step__detail__header\">\n        <div class=\"step__detail__item__value\">\n          <h2>{{ step.name }}</h2>\n        </div>\n        <div class=\"step__detail__item__edit-field\">\n          <input type=\"text\" [(ngModel)]=\"step.name\" name=\"name\" placeholder=\"... step name\">\n        </div>\n      </div>\n\n      <div class=\"step__detail\">\n        <div *ngFor=\"let item of stepDetailItems\">\n          <div class=\"step__detail__item\">\n            <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n            <div class=\"step__detail__item__value\">\n              <p>{{ step.description[item.name] }}</p>\n            </div>\n            <div class=\"step__detail__item__edit-field\">\n              <textarea [(ngModel)]=\"step.description[item.name]\" name=\"{{ item.name }}\" placeholder=\"...\"></textarea>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class=\"center\">\n        <div *ngIf=\"step.completed === true\">\n          <button class=\"on-dark\" (click)=\"onIncomplete()\">Mark as incomplete</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n        <div *ngIf=\"step.completed === false\">\n          <button class=\"on-dark\" (click)=\"onComplete()\">Mark as completed</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n      </div>\n    </section>\n  </div>\n"
 
 /***/ },
 /* 437 */
 /***/ function(module, exports) {
 
-	module.exports = "<div *ngIf=\"plan\">\n\n<div class=\"plan-header\" [class.editing]=\"editing === true\">\n  <h1 class=\"plan-header__title\">{{ plan.name }} <i class=\"fa fa-pencil\" (click)=\"onEdit()\"></i></h1>\n  <div class=\"plan-header__title--editing\">\n    <input type=\"text\" [(ngModel)]=\"plan.name\" name=\"name\"><i class=\"fa fa-check\" (click)=\"onSave()\"></i>\n  </div>\n</div>\n\n<section class=\"steps\">\n  <section class=\"starting-step\">\n    <!-- intentionally left blank -->\n  </section>\n\n  <section class=\"dynamic-steps\">\n\n    <div *ngIf=\"steps.length === 0\" class=\"no-steps\">\n      <h2 (click)=\"onAddStep(-1)\"><i class=\"fa fa-plus-circle\"></i>Add your first step</h2>\n    </div>\n\n    <div class=\"step-wrapper one-{{steps.length}}\" *ngFor=\"let step of steps; let first = first; let index = index\">\n\n      <div *ngIf=\"first == true\">\n        <div class=\"add-first-step\" (click)=\"onAddStep(-1)\">\n          <i class=\"fa fa-plus-circle\"></i>\n        </div>\n      </div>\n\n      <sp-step [step]=\"step\" (onDeleteStep)=\"onDeleteStep($event)\"></sp-step>\n      <div class=\"add-step\" (click)=\"onAddStep(index)\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"final-step\">\n    <!-- intentionally left blank -->\n  </section>\n</section>\n\n</div>\n\n<section class=\"below-steps\">\n    <!-- intentionally left blank -->\n</section>"
+	module.exports = ":host {\n  display: block; }\n\n.step__title {\n  text-align: center;\n  cursor: pointer;\n  font-family: \"Indie Flower\", cursive;\n  font-size: 1.375em;\n  line-height: 1.3em; }\n  .step__title .accent-icon {\n    opacity: 0.3;\n    transition: all 0.3s ease; }\n  .step__title:hover .accent-icon {\n    opacity: 1; }\n\n.step__detail, .step__detail--completed {\n  padding: 1em;\n  height: 25em;\n  overflow-y: scroll;\n  position: relative;\n  border: 5px solid #DDDABE;\n  border-bottom: 0;\n  border-radius: 10px 10px 0 0;\n  min-width: 120px;\n  min-height: 200px; }\n  .step__detail--completed {\n    background-color: #DDDABE;\n    overflow: visible; }\n  .step__detail .step__detail__banner, .step__detail--completed .step__detail__banner {\n    display: block;\n    font-size: 4em;\n    text-align: center;\n    padding-top: 2em;\n    text-align: center; }\n\n.step__detail__item {\n  margin-bottom: 1em; }\n  .step__detail__item p {\n    font-family: \"Indie Flower\", cursive; }\n\n.step__detail__item__header {\n  font-size: 1.4em; }\n\n.view-wrapper {\n  display: none;\n  width: 100%;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  left: 0;\n  top: 0;\n  z-index: 8; }\n  .view-wrapper.open {\n    display: block; }\n  .view-wrapper.editing .step__detail__item__value {\n    display: none !important; }\n  .view-wrapper.editing .step__detail__item__edit-field {\n    display: block !important; }\n\n.view {\n  position: fixed;\n  padding: 3em;\n  height: calc(100vh - 6em);\n  overflow-y: scroll;\n  width: calc(100% - 6em);\n  top: 0;\n  left: 0;\n  z-index: 9;\n  color: #ffffff; }\n  .view .view__controls {\n    position: fixed;\n    right: 1em;\n    top: 1em;\n    font-size: 1.5em; }\n    .view .view__controls i {\n      display: block;\n      width: 1.5em;\n      text-align: center;\n      cursor: pointer;\n      margin-bottom: 0.3em; }\n  .view .step__detail__header {\n    text-align: center;\n    padding-bottom: 1em;\n    border-bottom: 1px solid #ffffff;\n    margin-bottom: 2em; }\n    .view .step__detail__header input {\n      max-width: 37.5em;\n      width: 100%;\n      font-family: \"Lora\", serif;\n      font-weight: bold;\n      font-size: 1.5em;\n      text-align: center;\n      background: transparent;\n      border: 1px solid rgba(255, 255, 255, 0.2);\n      padding: 1em;\n      color: #ffffff; }\n  .view .step__detail, .view .step__detail--completed {\n    overflow: visible;\n    height: auto;\n    border: 0; }\n    .view .step__detail .step__detail__item, .view .step__detail--completed .step__detail__item {\n      margin-bottom: 5em;\n      text-align: center; }\n    .view .step__detail .step__detail__item__header, .view .step__detail--completed .step__detail__item__header {\n      padding-bottom: 0.5em;\n      border-bottom: 1px solid rgba(255, 255, 255, 0.2);\n      margin-bottom: 1em; }\n\n.step__detail__item__value {\n  max-width: 37.5em;\n  margin: 0 auto;\n  font-size: 1.3em;\n  color: #cccccc; }\n\n.step__detail__item__edit-field {\n  display: none;\n  max-width: calc(37.5em + 2em);\n  margin: 0 auto;\n  font-size: 1.3em; }\n  .step__detail__item__edit-field textarea {\n    text-align: center;\n    width: 100%;\n    color: #cccccc;\n    background: transparent;\n    min-height: 2em;\n    padding: 1em;\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    font-family: \"Indie Flower\", cursive; }\n"
 
 /***/ },
 /* 438 */
 /***/ function(module, exports) {
 
-	module.exports = ":host {\n  display: block; }\n\n.steps,\n.dynamic-steps {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  align-items: flex-end;\n  padding-top: 3em; }\n\n.dynamic-steps {\n  /* Make room for the starting and final steps... and a little breathing room */\n  width: calc(100% - 3.125em - 3.125em - (2 * 3em)); }\n\n.one-1 {\n  width: calc(100% - 0em); }\n\n.one-2 {\n  width: calc(50% - 1.5em); }\n\n.one-3 {\n  width: calc(33.33333% - 2em); }\n\n.one-4 {\n  width: calc(25% - 2.25em); }\n\n.one-5 {\n  width: calc(20% - 2.4em); }\n\n.one-6 {\n  width: calc(16.66667% - 2.5em); }\n\n.one-7 {\n  width: calc(14.28571% - 2.57143em); }\n\n.starting-step {\n  background: #78684E;\n  width: 3.125em;\n  height: 25em;\n  color: #ffffff;\n  border-top-right-radius: 10px; }\n  .starting-step:before {\n    display: block;\n    content: ' ';\n    width: 40px;\n    height: 50px;\n    background-image: url(\"/img/stick-running.svg\");\n    background-size: cover;\n    position: relative;\n    top: -32px;\n    left: 18px; }\n\n.final-step {\n  border-top-left-radius: 10px;\n  background: #798616;\n  width: 3.125em;\n  height: 25em; }\n\n.below-steps {\n  background: #3a3226;\n  height: 2em; }\n\n.step-wrapper {\n  position: relative; }\n\n.add-step, .add-first-step {\n  text-align: center;\n  position: absolute;\n  right: -3em;\n  width: 3em;\n  top: 10em;\n  cursor: pointer;\n  padding: 1em 0;\n  transition: all 0.3s ease;\n  opacity: 0.3; }\n  .add-step:hover, .add-first-step:hover {\n    opacity: 1; }\n\n.add-first-step {\n  left: -3em;\n  right: auto; }\n\n.no-steps {\n  height: 18.75em;\n  text-align: center;\n  width: 100%; }\n  .no-steps h2 {\n    cursor: pointer;\n    display: inline-block; }\n\n.plan-header {\n  max-width: 37.5em;\n  margin: 0 auto; }\n  .plan-header__title {\n    text-align: center; }\n    .plan-header__title i {\n      cursor: pointer;\n      opacity: 0.3;\n      transition: opacity 0.3s ease; }\n      .plan-header__title i:hover {\n        opacity: 1; }\n  .plan-header__title--editing {\n    display: none;\n    width: 100%;\n    /* Match H1 styles */\n    font-size: 2em;\n    font-family: 'Lora', serif;\n    font-weight: bold;\n    margin: 0.67em auto; }\n    .plan-header__title--editing i {\n      display: inline-block;\n      cursor: pointer;\n      width: 1.5em;\n      text-align: center; }\n    .plan-header__title--editing input {\n      /* Leave room for the \"save\" icon */\n      width: calc(100% - 2em);\n      max-width: 550px; }\n  .plan-header.editing .plan-header__title {\n    display: none; }\n  .plan-header.editing .plan-header__title--editing {\n    display: block; }\n"
+	module.exports = "<div *ngIf=\"plan\">\n\n<div class=\"plan-header\" [class.editing]=\"editing === true\">\n  <h1 class=\"plan-header__title\">{{ plan.name }} <i class=\"fa fa-pencil\" (click)=\"onEdit()\"></i></h1>\n  <div class=\"plan-header__title--editing\">\n    <input type=\"text\" [(ngModel)]=\"plan.name\" name=\"name\"><i class=\"fa fa-check\" (click)=\"onSave()\"></i>\n  </div>\n</div>\n\n<section class=\"steps\">\n  <section class=\"starting-step\">\n    <!-- intentionally left blank -->\n  </section>\n\n  <section class=\"dynamic-steps\">\n\n    <div *ngIf=\"steps.length === 0\" class=\"no-steps\">\n      <h2 (click)=\"onAddStep(-1)\"><i class=\"fa fa-plus-circle\"></i>Add your first step</h2>\n    </div>\n\n    <div class=\"step-wrapper one-{{steps.length}}\" *ngFor=\"let step of steps; let first = first; let index = index\">\n\n      <div *ngIf=\"first == true\">\n        <div class=\"add-first-step\" (click)=\"onAddStep(-1)\">\n          <i class=\"fa fa-plus-circle\"></i>\n        </div>\n      </div>\n\n      <sp-step [step]=\"step\" (onDeleteStep)=\"onDeleteStep($event)\"></sp-step>\n      <div class=\"add-step\" (click)=\"onAddStep(index)\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"final-step\">\n    <!-- intentionally left blank -->\n  </section>\n</section>\n\n</div>\n\n<section class=\"below-steps\">\n    <!-- intentionally left blank -->\n</section>"
 
 /***/ },
 /* 439 */
+/***/ function(module, exports) {
+
+	module.exports = ":host {\n  display: block; }\n\n.steps,\n.dynamic-steps {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  align-items: flex-end;\n  padding-top: 3em; }\n\n.dynamic-steps {\n  /* Make room for the starting and final steps... and a little breathing room */\n  width: calc(100% - 3.125em - 3.125em - (2 * 3em)); }\n\n.one-1 {\n  width: calc(100% - 0em); }\n\n.one-2 {\n  width: calc(50% - 1.5em); }\n\n.one-3 {\n  width: calc(33.33333% - 2em); }\n\n.one-4 {\n  width: calc(25% - 2.25em); }\n\n.one-5 {\n  width: calc(20% - 2.4em); }\n\n.one-6 {\n  width: calc(16.66667% - 2.5em); }\n\n.one-7 {\n  width: calc(14.28571% - 2.57143em); }\n\n.starting-step {\n  background: #78684E;\n  width: 3.125em;\n  height: 25em;\n  color: #ffffff;\n  border-top-right-radius: 10px; }\n  .starting-step:before {\n    display: block;\n    content: ' ';\n    width: 40px;\n    height: 50px;\n    background-image: url(\"/img/stick-running.svg\");\n    background-size: cover;\n    position: relative;\n    top: -32px;\n    left: 18px; }\n\n.final-step {\n  border-top-left-radius: 10px;\n  background: #798616;\n  width: 3.125em;\n  height: 25em; }\n\n.below-steps {\n  background: #3a3226;\n  height: 2em; }\n\n.step-wrapper {\n  position: relative; }\n\n.add-step, .add-first-step {\n  text-align: center;\n  position: absolute;\n  right: -3em;\n  width: 3em;\n  top: 10em;\n  cursor: pointer;\n  padding: 1em 0;\n  transition: all 0.3s ease;\n  opacity: 0.3; }\n  .add-step:hover, .add-first-step:hover {\n    opacity: 1; }\n\n.add-first-step {\n  left: -3em;\n  right: auto; }\n\n.no-steps {\n  height: 18.75em;\n  text-align: center;\n  width: 100%; }\n  .no-steps h2 {\n    cursor: pointer;\n    display: inline-block; }\n\n.plan-header {\n  max-width: 37.5em;\n  margin: 0 auto; }\n  .plan-header__title {\n    text-align: center; }\n    .plan-header__title i {\n      cursor: pointer;\n      opacity: 0.3;\n      transition: opacity 0.3s ease; }\n      .plan-header__title i:hover {\n        opacity: 1; }\n  .plan-header__title--editing {\n    display: none;\n    width: 100%;\n    /* Match H1 styles */\n    font-size: 2em;\n    font-family: 'Lora', serif;\n    font-weight: bold;\n    margin: 0.67em auto; }\n    .plan-header__title--editing i {\n      display: inline-block;\n      cursor: pointer;\n      width: 1.5em;\n      text-align: center; }\n    .plan-header__title--editing input {\n      /* Leave room for the \"save\" icon */\n      width: calc(100% - 2em);\n      max-width: 550px; }\n  .plan-header.editing .plan-header__title {\n    display: none; }\n  .plan-header.editing .plan-header__title--editing {\n    display: block; }\n"
+
+/***/ },
+/* 440 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -59695,8 +59709,8 @@
 	    StrategicPlanListComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sp-list',
-	            template: __webpack_require__(440),
-	            styles: [__webpack_require__(1031)]
+	            template: __webpack_require__(441),
+	            styles: [__webpack_require__(442)]
 	        }), 
 	        __metadata('design:paramtypes', [strategic_plan_service_1.StrategicPlanService, router_1.Router])
 	    ], StrategicPlanListComponent);
@@ -59706,13 +59720,19 @@
 
 
 /***/ },
-/* 440 */
+/* 441 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"container\">\n  <button (click)=\"onCreate()\">Create a new Plan</button>\n\n  <table>\n    <tr *ngFor=\"let plan of plans\">\n      <td><a routerLink=\"/plans/{{ plan.id }}\">{{ plan.name }}</a></td>\n      <td>\n        <a class=\"icon\" routerLink=\"/plans/{{ plan.id }}\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\n        <a class=\"icon danger\" (click)=\"onDelete(plan)\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n      </td>\n    </tr>\n  </table>\n</div>"
 
 /***/ },
-/* 441 */
+/* 442 */
+/***/ function(module, exports) {
+
+	module.exports = ":host {\n  display: block;\n  padding-bottom: 3em; }\n\ntable {\n  font-size: 1.2em;\n  margin: 3em 0;\n  table-layout: fixed;\n  width: 100%; }\n  table tr {\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }\n  table td {\n    padding: 0.5em 0; }\n  table a {\n    cursor: pointer; }\n    table a.icon {\n      transition: all 0.3s ease;\n      opacity: 0.3; }\n      table a.icon:hover {\n        opacity: 1; }\n    table a.danger:hover {\n      color: #ff0000; }\n"
+
+/***/ },
+/* 443 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -59726,11 +59746,11 @@
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(442));
+	__export(__webpack_require__(444));
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 442 */
+/* 444 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -59757,67 +59777,67 @@
 	 * Forms providers are not included in default providers; you must import these providers
 	 * explicitly.
 	 */
-	var directives_1 = __webpack_require__(443);
+	var directives_1 = __webpack_require__(445);
 	exports.FORM_DIRECTIVES = directives_1.FORM_DIRECTIVES;
 	exports.REACTIVE_FORM_DIRECTIVES = directives_1.REACTIVE_FORM_DIRECTIVES;
-	var abstract_control_directive_1 = __webpack_require__(454);
+	var abstract_control_directive_1 = __webpack_require__(456);
 	exports.AbstractControlDirective = abstract_control_directive_1.AbstractControlDirective;
-	var abstract_form_group_directive_1 = __webpack_require__(467);
+	var abstract_form_group_directive_1 = __webpack_require__(469);
 	exports.AbstractFormGroupDirective = abstract_form_group_directive_1.AbstractFormGroupDirective;
-	var checkbox_value_accessor_1 = __webpack_require__(444);
+	var checkbox_value_accessor_1 = __webpack_require__(446);
 	exports.CheckboxControlValueAccessor = checkbox_value_accessor_1.CheckboxControlValueAccessor;
-	var control_container_1 = __webpack_require__(465);
+	var control_container_1 = __webpack_require__(467);
 	exports.ControlContainer = control_container_1.ControlContainer;
-	var control_value_accessor_1 = __webpack_require__(445);
+	var control_value_accessor_1 = __webpack_require__(447);
 	exports.NG_VALUE_ACCESSOR = control_value_accessor_1.NG_VALUE_ACCESSOR;
-	var default_value_accessor_1 = __webpack_require__(446);
+	var default_value_accessor_1 = __webpack_require__(448);
 	exports.DefaultValueAccessor = default_value_accessor_1.DefaultValueAccessor;
-	var ng_control_1 = __webpack_require__(449);
+	var ng_control_1 = __webpack_require__(451);
 	exports.NgControl = ng_control_1.NgControl;
-	var ng_control_status_1 = __webpack_require__(448);
+	var ng_control_status_1 = __webpack_require__(450);
 	exports.NgControlStatus = ng_control_status_1.NgControlStatus;
-	var ng_form_1 = __webpack_require__(455);
+	var ng_form_1 = __webpack_require__(457);
 	exports.NgForm = ng_form_1.NgForm;
-	var ng_model_1 = __webpack_require__(466);
+	var ng_model_1 = __webpack_require__(468);
 	exports.NgModel = ng_model_1.NgModel;
-	var ng_model_group_1 = __webpack_require__(468);
+	var ng_model_group_1 = __webpack_require__(470);
 	exports.NgModelGroup = ng_model_group_1.NgModelGroup;
-	var form_control_directive_1 = __webpack_require__(471);
+	var form_control_directive_1 = __webpack_require__(473);
 	exports.FormControlDirective = form_control_directive_1.FormControlDirective;
-	var form_control_name_1 = __webpack_require__(472);
+	var form_control_name_1 = __webpack_require__(474);
 	exports.FormControlName = form_control_name_1.FormControlName;
-	var form_group_directive_1 = __webpack_require__(474);
+	var form_group_directive_1 = __webpack_require__(476);
 	exports.FormGroupDirective = form_group_directive_1.FormGroupDirective;
-	var form_group_name_1 = __webpack_require__(475);
+	var form_group_name_1 = __webpack_require__(477);
 	exports.FormArrayName = form_group_name_1.FormArrayName;
-	var form_group_name_2 = __webpack_require__(475);
+	var form_group_name_2 = __webpack_require__(477);
 	exports.FormGroupName = form_group_name_2.FormGroupName;
-	var select_control_value_accessor_1 = __webpack_require__(463);
+	var select_control_value_accessor_1 = __webpack_require__(465);
 	exports.NgSelectOption = select_control_value_accessor_1.NgSelectOption;
 	exports.SelectControlValueAccessor = select_control_value_accessor_1.SelectControlValueAccessor;
-	var select_multiple_control_value_accessor_1 = __webpack_require__(464);
+	var select_multiple_control_value_accessor_1 = __webpack_require__(466);
 	exports.SelectMultipleControlValueAccessor = select_multiple_control_value_accessor_1.SelectMultipleControlValueAccessor;
-	var validators_1 = __webpack_require__(476);
+	var validators_1 = __webpack_require__(478);
 	exports.MaxLengthValidator = validators_1.MaxLengthValidator;
 	exports.MinLengthValidator = validators_1.MinLengthValidator;
 	exports.PatternValidator = validators_1.PatternValidator;
 	exports.RequiredValidator = validators_1.RequiredValidator;
-	var form_builder_1 = __webpack_require__(477);
+	var form_builder_1 = __webpack_require__(479);
 	exports.FormBuilder = form_builder_1.FormBuilder;
-	var model_1 = __webpack_require__(457);
+	var model_1 = __webpack_require__(459);
 	exports.AbstractControl = model_1.AbstractControl;
 	exports.FormArray = model_1.FormArray;
 	exports.FormControl = model_1.FormControl;
 	exports.FormGroup = model_1.FormGroup;
-	var validators_2 = __webpack_require__(459);
+	var validators_2 = __webpack_require__(461);
 	exports.NG_ASYNC_VALIDATORS = validators_2.NG_ASYNC_VALIDATORS;
 	exports.NG_VALIDATORS = validators_2.NG_VALIDATORS;
 	exports.Validators = validators_2.Validators;
-	__export(__webpack_require__(478));
+	__export(__webpack_require__(480));
 	//# sourceMappingURL=forms.js.map
 
 /***/ },
-/* 443 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -59829,55 +59849,55 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var checkbox_value_accessor_1 = __webpack_require__(444);
-	var default_value_accessor_1 = __webpack_require__(446);
-	var ng_control_status_1 = __webpack_require__(448);
-	var ng_form_1 = __webpack_require__(455);
-	var ng_model_1 = __webpack_require__(466);
-	var ng_model_group_1 = __webpack_require__(468);
-	var number_value_accessor_1 = __webpack_require__(461);
-	var radio_control_value_accessor_1 = __webpack_require__(462);
-	var form_control_directive_1 = __webpack_require__(471);
-	var form_control_name_1 = __webpack_require__(472);
-	var form_group_directive_1 = __webpack_require__(474);
-	var form_group_name_1 = __webpack_require__(475);
-	var select_control_value_accessor_1 = __webpack_require__(463);
-	var select_multiple_control_value_accessor_1 = __webpack_require__(464);
-	var validators_1 = __webpack_require__(476);
-	var checkbox_value_accessor_2 = __webpack_require__(444);
+	var checkbox_value_accessor_1 = __webpack_require__(446);
+	var default_value_accessor_1 = __webpack_require__(448);
+	var ng_control_status_1 = __webpack_require__(450);
+	var ng_form_1 = __webpack_require__(457);
+	var ng_model_1 = __webpack_require__(468);
+	var ng_model_group_1 = __webpack_require__(470);
+	var number_value_accessor_1 = __webpack_require__(463);
+	var radio_control_value_accessor_1 = __webpack_require__(464);
+	var form_control_directive_1 = __webpack_require__(473);
+	var form_control_name_1 = __webpack_require__(474);
+	var form_group_directive_1 = __webpack_require__(476);
+	var form_group_name_1 = __webpack_require__(477);
+	var select_control_value_accessor_1 = __webpack_require__(465);
+	var select_multiple_control_value_accessor_1 = __webpack_require__(466);
+	var validators_1 = __webpack_require__(478);
+	var checkbox_value_accessor_2 = __webpack_require__(446);
 	exports.CheckboxControlValueAccessor = checkbox_value_accessor_2.CheckboxControlValueAccessor;
-	var default_value_accessor_2 = __webpack_require__(446);
+	var default_value_accessor_2 = __webpack_require__(448);
 	exports.DefaultValueAccessor = default_value_accessor_2.DefaultValueAccessor;
-	var ng_control_1 = __webpack_require__(449);
+	var ng_control_1 = __webpack_require__(451);
 	exports.NgControl = ng_control_1.NgControl;
-	var ng_control_status_2 = __webpack_require__(448);
+	var ng_control_status_2 = __webpack_require__(450);
 	exports.NgControlStatus = ng_control_status_2.NgControlStatus;
-	var ng_form_2 = __webpack_require__(455);
+	var ng_form_2 = __webpack_require__(457);
 	exports.NgForm = ng_form_2.NgForm;
-	var ng_model_2 = __webpack_require__(466);
+	var ng_model_2 = __webpack_require__(468);
 	exports.NgModel = ng_model_2.NgModel;
-	var ng_model_group_2 = __webpack_require__(468);
+	var ng_model_group_2 = __webpack_require__(470);
 	exports.NgModelGroup = ng_model_group_2.NgModelGroup;
-	var number_value_accessor_2 = __webpack_require__(461);
+	var number_value_accessor_2 = __webpack_require__(463);
 	exports.NumberValueAccessor = number_value_accessor_2.NumberValueAccessor;
-	var radio_control_value_accessor_2 = __webpack_require__(462);
+	var radio_control_value_accessor_2 = __webpack_require__(464);
 	exports.RadioControlValueAccessor = radio_control_value_accessor_2.RadioControlValueAccessor;
-	var form_control_directive_2 = __webpack_require__(471);
+	var form_control_directive_2 = __webpack_require__(473);
 	exports.FormControlDirective = form_control_directive_2.FormControlDirective;
-	var form_control_name_2 = __webpack_require__(472);
+	var form_control_name_2 = __webpack_require__(474);
 	exports.FormControlName = form_control_name_2.FormControlName;
-	var form_group_directive_2 = __webpack_require__(474);
+	var form_group_directive_2 = __webpack_require__(476);
 	exports.FormGroupDirective = form_group_directive_2.FormGroupDirective;
-	var form_group_name_2 = __webpack_require__(475);
+	var form_group_name_2 = __webpack_require__(477);
 	exports.FormArrayName = form_group_name_2.FormArrayName;
 	exports.FormGroupName = form_group_name_2.FormGroupName;
-	var select_control_value_accessor_2 = __webpack_require__(463);
+	var select_control_value_accessor_2 = __webpack_require__(465);
 	exports.NgSelectOption = select_control_value_accessor_2.NgSelectOption;
 	exports.SelectControlValueAccessor = select_control_value_accessor_2.SelectControlValueAccessor;
-	var select_multiple_control_value_accessor_2 = __webpack_require__(464);
+	var select_multiple_control_value_accessor_2 = __webpack_require__(466);
 	exports.NgSelectMultipleOption = select_multiple_control_value_accessor_2.NgSelectMultipleOption;
 	exports.SelectMultipleControlValueAccessor = select_multiple_control_value_accessor_2.SelectMultipleControlValueAccessor;
-	var validators_2 = __webpack_require__(476);
+	var validators_2 = __webpack_require__(478);
 	exports.MaxLengthValidator = validators_2.MaxLengthValidator;
 	exports.MinLengthValidator = validators_2.MinLengthValidator;
 	exports.PatternValidator = validators_2.PatternValidator;
@@ -59925,7 +59945,7 @@
 	//# sourceMappingURL=directives.js.map
 
 /***/ },
-/* 444 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -59937,7 +59957,7 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var control_value_accessor_1 = __webpack_require__(445);
+	var control_value_accessor_1 = __webpack_require__(447);
 	exports.CHECKBOX_VALUE_ACCESSOR = {
 	    provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return CheckboxControlValueAccessor; }),
@@ -59974,7 +59994,7 @@
 	//# sourceMappingURL=checkbox_value_accessor.js.map
 
 /***/ },
-/* 445 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -59996,7 +60016,7 @@
 	//# sourceMappingURL=control_value_accessor.js.map
 
 /***/ },
-/* 446 */
+/* 448 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60008,8 +60028,8 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var lang_1 = __webpack_require__(447);
-	var control_value_accessor_1 = __webpack_require__(445);
+	var lang_1 = __webpack_require__(449);
+	var control_value_accessor_1 = __webpack_require__(447);
 	exports.DEFAULT_VALUE_ACCESSOR = {
 	    provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return DefaultValueAccessor; }),
@@ -60050,7 +60070,7 @@
 	//# sourceMappingURL=default_value_accessor.js.map
 
 /***/ },
-/* 447 */
+/* 449 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -60471,7 +60491,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 448 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60483,8 +60503,8 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var lang_1 = __webpack_require__(447);
-	var ng_control_1 = __webpack_require__(449);
+	var lang_1 = __webpack_require__(449);
+	var ng_control_1 = __webpack_require__(451);
 	var NgControlStatus = (function () {
 	    function NgControlStatus(cd) {
 	        this._cd = cd;
@@ -60555,7 +60575,7 @@
 	//# sourceMappingURL=ng_control_status.js.map
 
 /***/ },
-/* 449 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60571,8 +60591,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var exceptions_1 = __webpack_require__(450);
-	var abstract_control_directive_1 = __webpack_require__(454);
+	var exceptions_1 = __webpack_require__(452);
+	var abstract_control_directive_1 = __webpack_require__(456);
 	/**
 	 * A base class that all control directive extend.
 	 * It binds a {@link Control} object to a DOM element.
@@ -60604,7 +60624,7 @@
 	//# sourceMappingURL=ng_control.js.map
 
 /***/ },
-/* 450 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60620,9 +60640,9 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var base_wrapped_exception_1 = __webpack_require__(451);
-	var exception_handler_1 = __webpack_require__(452);
-	var exception_handler_2 = __webpack_require__(452);
+	var base_wrapped_exception_1 = __webpack_require__(453);
+	var exception_handler_1 = __webpack_require__(454);
+	var exception_handler_2 = __webpack_require__(454);
 	exports.ExceptionHandler = exception_handler_2.ExceptionHandler;
 	/**
 	 * @stable
@@ -60698,7 +60718,7 @@
 	//# sourceMappingURL=exceptions.js.map
 
 /***/ },
-/* 451 */
+/* 453 */
 /***/ function(module, exports) {
 
 	/**
@@ -60760,7 +60780,7 @@
 	//# sourceMappingURL=base_wrapped_exception.js.map
 
 /***/ },
-/* 452 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60771,9 +60791,9 @@
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var base_wrapped_exception_1 = __webpack_require__(451);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
+	var base_wrapped_exception_1 = __webpack_require__(453);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
 	var _ArrayLogger = (function () {
 	    function _ArrayLogger() {
 	        this.res = [];
@@ -60905,7 +60925,7 @@
 	//# sourceMappingURL=exception_handler.js.map
 
 /***/ },
-/* 453 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60916,7 +60936,7 @@
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var lang_1 = __webpack_require__(447);
+	var lang_1 = __webpack_require__(449);
 	exports.Map = lang_1.global.Map;
 	exports.Set = lang_1.global.Set;
 	// Safari and Internet Explorer do not support the iterable parameter to the
@@ -61279,7 +61299,7 @@
 	//# sourceMappingURL=collection.js.map
 
 /***/ },
-/* 454 */
+/* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61290,8 +61310,8 @@
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var exceptions_1 = __webpack_require__(450);
-	var lang_1 = __webpack_require__(447);
+	var exceptions_1 = __webpack_require__(452);
+	var lang_1 = __webpack_require__(449);
 	/**
 	 * Base class for control directives.
 	 *
@@ -61384,7 +61404,7 @@
 	//# sourceMappingURL=abstract_control_directive.js.map
 
 /***/ },
-/* 455 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61401,13 +61421,13 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var async_1 = __webpack_require__(456);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
-	var model_1 = __webpack_require__(457);
-	var validators_1 = __webpack_require__(459);
-	var control_container_1 = __webpack_require__(465);
-	var shared_1 = __webpack_require__(458);
+	var async_1 = __webpack_require__(458);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
+	var model_1 = __webpack_require__(459);
+	var validators_1 = __webpack_require__(461);
+	var control_container_1 = __webpack_require__(467);
+	var shared_1 = __webpack_require__(460);
 	exports.formDirectiveProvider = {
 	    provide: control_container_1.ControlContainer,
 	    useExisting: core_1.forwardRef(function () { return NgForm; })
@@ -61525,7 +61545,7 @@
 	//# sourceMappingURL=ng_form.js.map
 
 /***/ },
-/* 456 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61647,7 +61667,7 @@
 	//# sourceMappingURL=async.js.map
 
 /***/ },
-/* 457 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -61664,11 +61684,11 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var PromiseObservable_1 = __webpack_require__(258);
-	var shared_1 = __webpack_require__(458);
-	var async_1 = __webpack_require__(456);
-	var collection_1 = __webpack_require__(453);
-	var exceptions_1 = __webpack_require__(450);
-	var lang_1 = __webpack_require__(447);
+	var shared_1 = __webpack_require__(460);
+	var async_1 = __webpack_require__(458);
+	var collection_1 = __webpack_require__(455);
+	var exceptions_1 = __webpack_require__(452);
+	var lang_1 = __webpack_require__(449);
 	/**
 	 * Indicates that a FormControl is valid, i.e. that no errors exist in the input value.
 	 */
@@ -62390,7 +62410,7 @@
 	//# sourceMappingURL=model.js.map
 
 /***/ },
-/* 458 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62401,17 +62421,17 @@
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var collection_1 = __webpack_require__(453);
-	var exceptions_1 = __webpack_require__(450);
-	var lang_1 = __webpack_require__(447);
-	var validators_1 = __webpack_require__(459);
-	var checkbox_value_accessor_1 = __webpack_require__(444);
-	var default_value_accessor_1 = __webpack_require__(446);
-	var normalize_validator_1 = __webpack_require__(460);
-	var number_value_accessor_1 = __webpack_require__(461);
-	var radio_control_value_accessor_1 = __webpack_require__(462);
-	var select_control_value_accessor_1 = __webpack_require__(463);
-	var select_multiple_control_value_accessor_1 = __webpack_require__(464);
+	var collection_1 = __webpack_require__(455);
+	var exceptions_1 = __webpack_require__(452);
+	var lang_1 = __webpack_require__(449);
+	var validators_1 = __webpack_require__(461);
+	var checkbox_value_accessor_1 = __webpack_require__(446);
+	var default_value_accessor_1 = __webpack_require__(448);
+	var normalize_validator_1 = __webpack_require__(462);
+	var number_value_accessor_1 = __webpack_require__(463);
+	var radio_control_value_accessor_1 = __webpack_require__(464);
+	var select_control_value_accessor_1 = __webpack_require__(465);
+	var select_multiple_control_value_accessor_1 = __webpack_require__(466);
 	function controlPath(name, parent) {
 	    var p = collection_1.ListWrapper.clone(parent.path);
 	    p.push(name);
@@ -62519,7 +62539,7 @@
 	//# sourceMappingURL=shared.js.map
 
 /***/ },
-/* 459 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62532,8 +62552,8 @@
 	"use strict";
 	var core_1 = __webpack_require__(11);
 	var toPromise_1 = __webpack_require__(243);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
 	/**
 	 * Providers for validators to be used for {@link FormControl}s in a form.
 	 *
@@ -62670,7 +62690,7 @@
 	//# sourceMappingURL=validators.js.map
 
 /***/ },
-/* 460 */
+/* 462 */
 /***/ function(module, exports) {
 
 	/**
@@ -62702,7 +62722,7 @@
 	//# sourceMappingURL=normalize_validator.js.map
 
 /***/ },
-/* 461 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62714,8 +62734,8 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var lang_1 = __webpack_require__(447);
-	var control_value_accessor_1 = __webpack_require__(445);
+	var lang_1 = __webpack_require__(449);
+	var control_value_accessor_1 = __webpack_require__(447);
 	exports.NUMBER_VALUE_ACCESSOR = {
 	    provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return NumberValueAccessor; }),
@@ -62760,7 +62780,7 @@
 	//# sourceMappingURL=number_value_accessor.js.map
 
 /***/ },
-/* 462 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62772,11 +62792,11 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var collection_1 = __webpack_require__(453);
-	var exceptions_1 = __webpack_require__(450);
-	var lang_1 = __webpack_require__(447);
-	var control_value_accessor_1 = __webpack_require__(445);
-	var ng_control_1 = __webpack_require__(449);
+	var collection_1 = __webpack_require__(455);
+	var exceptions_1 = __webpack_require__(452);
+	var lang_1 = __webpack_require__(449);
+	var control_value_accessor_1 = __webpack_require__(447);
+	var ng_control_1 = __webpack_require__(451);
 	exports.RADIO_VALUE_ACCESSOR = {
 	    provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return RadioControlValueAccessor; }),
@@ -62887,7 +62907,7 @@
 	//# sourceMappingURL=radio_control_value_accessor.js.map
 
 /***/ },
-/* 463 */
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62899,9 +62919,9 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
-	var control_value_accessor_1 = __webpack_require__(445);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
+	var control_value_accessor_1 = __webpack_require__(447);
 	exports.SELECT_VALUE_ACCESSOR = {
 	    provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return SelectControlValueAccessor; }),
@@ -63032,7 +63052,7 @@
 	//# sourceMappingURL=select_control_value_accessor.js.map
 
 /***/ },
-/* 464 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63044,9 +63064,9 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
-	var control_value_accessor_1 = __webpack_require__(445);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
+	var control_value_accessor_1 = __webpack_require__(447);
 	exports.SELECT_MULTIPLE_VALUE_ACCESSOR = {
 	    provide: control_value_accessor_1.NG_VALUE_ACCESSOR,
 	    useExisting: core_1.forwardRef(function () { return SelectMultipleControlValueAccessor; }),
@@ -63218,7 +63238,7 @@
 	//# sourceMappingURL=select_multiple_control_value_accessor.js.map
 
 /***/ },
-/* 465 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63234,7 +63254,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var abstract_control_directive_1 = __webpack_require__(454);
+	var abstract_control_directive_1 = __webpack_require__(456);
 	/**
 	 * A directive that contains multiple {@link NgControl}s.
 	 *
@@ -63269,7 +63289,7 @@
 	//# sourceMappingURL=control_container.js.map
 
 /***/ },
-/* 466 */
+/* 468 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63286,17 +63306,17 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var async_1 = __webpack_require__(456);
-	var model_1 = __webpack_require__(457);
-	var validators_1 = __webpack_require__(459);
-	var abstract_form_group_directive_1 = __webpack_require__(467);
-	var control_container_1 = __webpack_require__(465);
-	var control_value_accessor_1 = __webpack_require__(445);
-	var ng_control_1 = __webpack_require__(449);
-	var ng_form_1 = __webpack_require__(455);
-	var ng_model_group_1 = __webpack_require__(468);
-	var shared_1 = __webpack_require__(458);
-	var template_driven_errors_1 = __webpack_require__(469);
+	var async_1 = __webpack_require__(458);
+	var model_1 = __webpack_require__(459);
+	var validators_1 = __webpack_require__(461);
+	var abstract_form_group_directive_1 = __webpack_require__(469);
+	var control_container_1 = __webpack_require__(467);
+	var control_value_accessor_1 = __webpack_require__(447);
+	var ng_control_1 = __webpack_require__(451);
+	var ng_form_1 = __webpack_require__(457);
+	var ng_model_group_1 = __webpack_require__(470);
+	var shared_1 = __webpack_require__(460);
+	var template_driven_errors_1 = __webpack_require__(471);
 	exports.formControlBinding = {
 	    provide: ng_control_1.NgControl,
 	    useExisting: core_1.forwardRef(function () { return NgModel; })
@@ -63425,7 +63445,7 @@
 	//# sourceMappingURL=ng_model.js.map
 
 /***/ },
-/* 467 */
+/* 469 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63441,8 +63461,8 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var control_container_1 = __webpack_require__(465);
-	var shared_1 = __webpack_require__(458);
+	var control_container_1 = __webpack_require__(467);
+	var shared_1 = __webpack_require__(460);
 	/**
 	 * This is a base class for code shared between {@link NgModelGroup} and {@link FormGroupName}.
 	 *
@@ -63500,7 +63520,7 @@
 	//# sourceMappingURL=abstract_form_group_directive.js.map
 
 /***/ },
-/* 468 */
+/* 470 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63517,11 +63537,11 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var validators_1 = __webpack_require__(459);
-	var abstract_form_group_directive_1 = __webpack_require__(467);
-	var control_container_1 = __webpack_require__(465);
-	var ng_form_1 = __webpack_require__(455);
-	var template_driven_errors_1 = __webpack_require__(469);
+	var validators_1 = __webpack_require__(461);
+	var abstract_form_group_directive_1 = __webpack_require__(469);
+	var control_container_1 = __webpack_require__(467);
+	var ng_form_1 = __webpack_require__(457);
+	var template_driven_errors_1 = __webpack_require__(471);
 	exports.modelGroupProvider = {
 	    provide: control_container_1.ControlContainer,
 	    useExisting: core_1.forwardRef(function () { return NgModelGroup; })
@@ -63560,7 +63580,7 @@
 	//# sourceMappingURL=ng_model_group.js.map
 
 /***/ },
-/* 469 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63571,8 +63591,8 @@
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var exceptions_1 = __webpack_require__(450);
-	var error_examples_1 = __webpack_require__(470);
+	var exceptions_1 = __webpack_require__(452);
+	var error_examples_1 = __webpack_require__(472);
 	var TemplateDrivenErrors = (function () {
 	    function TemplateDrivenErrors() {
 	    }
@@ -63594,7 +63614,7 @@
 	//# sourceMappingURL=template_driven_errors.js.map
 
 /***/ },
-/* 470 */
+/* 472 */
 /***/ function(module, exports) {
 
 	/**
@@ -63615,7 +63635,7 @@
 	//# sourceMappingURL=error_examples.js.map
 
 /***/ },
-/* 471 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63632,12 +63652,12 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var async_1 = __webpack_require__(456);
-	var collection_1 = __webpack_require__(453);
-	var validators_1 = __webpack_require__(459);
-	var control_value_accessor_1 = __webpack_require__(445);
-	var ng_control_1 = __webpack_require__(449);
-	var shared_1 = __webpack_require__(458);
+	var async_1 = __webpack_require__(458);
+	var collection_1 = __webpack_require__(455);
+	var validators_1 = __webpack_require__(461);
+	var control_value_accessor_1 = __webpack_require__(447);
+	var ng_control_1 = __webpack_require__(451);
+	var shared_1 = __webpack_require__(460);
 	exports.formControlBinding = {
 	    provide: ng_control_1.NgControl,
 	    useExisting: core_1.forwardRef(function () { return FormControlDirective; })
@@ -63712,7 +63732,7 @@
 	//# sourceMappingURL=form_control_directive.js.map
 
 /***/ },
-/* 472 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63729,16 +63749,16 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var async_1 = __webpack_require__(456);
-	var validators_1 = __webpack_require__(459);
-	var abstract_form_group_directive_1 = __webpack_require__(467);
-	var control_container_1 = __webpack_require__(465);
-	var control_value_accessor_1 = __webpack_require__(445);
-	var ng_control_1 = __webpack_require__(449);
-	var reactive_errors_1 = __webpack_require__(473);
-	var shared_1 = __webpack_require__(458);
-	var form_group_directive_1 = __webpack_require__(474);
-	var form_group_name_1 = __webpack_require__(475);
+	var async_1 = __webpack_require__(458);
+	var validators_1 = __webpack_require__(461);
+	var abstract_form_group_directive_1 = __webpack_require__(469);
+	var control_container_1 = __webpack_require__(467);
+	var control_value_accessor_1 = __webpack_require__(447);
+	var ng_control_1 = __webpack_require__(451);
+	var reactive_errors_1 = __webpack_require__(475);
+	var shared_1 = __webpack_require__(460);
+	var form_group_directive_1 = __webpack_require__(476);
+	var form_group_name_1 = __webpack_require__(477);
 	exports.controlNameBinding = {
 	    provide: ng_control_1.NgControl,
 	    useExisting: core_1.forwardRef(function () { return FormControlName; })
@@ -63831,7 +63851,7 @@
 	//# sourceMappingURL=form_control_name.js.map
 
 /***/ },
-/* 473 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63842,8 +63862,8 @@
 	 * found in the LICENSE file at https://angular.io/license
 	 */
 	"use strict";
-	var exceptions_1 = __webpack_require__(450);
-	var error_examples_1 = __webpack_require__(470);
+	var exceptions_1 = __webpack_require__(452);
+	var error_examples_1 = __webpack_require__(472);
 	var ReactiveErrors = (function () {
 	    function ReactiveErrors() {
 	    }
@@ -63868,7 +63888,7 @@
 	//# sourceMappingURL=reactive_errors.js.map
 
 /***/ },
-/* 474 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63885,13 +63905,13 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var async_1 = __webpack_require__(456);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
-	var validators_1 = __webpack_require__(459);
-	var control_container_1 = __webpack_require__(465);
-	var reactive_errors_1 = __webpack_require__(473);
-	var shared_1 = __webpack_require__(458);
+	var async_1 = __webpack_require__(458);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
+	var validators_1 = __webpack_require__(461);
+	var control_container_1 = __webpack_require__(467);
+	var reactive_errors_1 = __webpack_require__(475);
+	var shared_1 = __webpack_require__(460);
 	exports.formDirectiveProvider = {
 	    provide: control_container_1.ControlContainer,
 	    useExisting: core_1.forwardRef(function () { return FormGroupDirective; })
@@ -64008,7 +64028,7 @@
 	//# sourceMappingURL=form_group_directive.js.map
 
 /***/ },
-/* 475 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64025,12 +64045,12 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(11);
-	var validators_1 = __webpack_require__(459);
-	var abstract_form_group_directive_1 = __webpack_require__(467);
-	var control_container_1 = __webpack_require__(465);
-	var reactive_errors_1 = __webpack_require__(473);
-	var shared_1 = __webpack_require__(458);
-	var form_group_directive_1 = __webpack_require__(474);
+	var validators_1 = __webpack_require__(461);
+	var abstract_form_group_directive_1 = __webpack_require__(469);
+	var control_container_1 = __webpack_require__(467);
+	var reactive_errors_1 = __webpack_require__(475);
+	var shared_1 = __webpack_require__(460);
+	var form_group_directive_1 = __webpack_require__(476);
 	exports.formGroupNameProvider = {
 	    provide: control_container_1.ControlContainer,
 	    useExisting: core_1.forwardRef(function () { return FormGroupName; })
@@ -64137,7 +64157,7 @@
 	//# sourceMappingURL=form_group_name.js.map
 
 /***/ },
-/* 476 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64149,8 +64169,8 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var lang_1 = __webpack_require__(447);
-	var validators_1 = __webpack_require__(459);
+	var lang_1 = __webpack_require__(449);
+	var validators_1 = __webpack_require__(461);
 	exports.REQUIRED = validators_1.Validators.required;
 	exports.REQUIRED_VALIDATOR = {
 	    provide: validators_1.NG_VALIDATORS,
@@ -64259,7 +64279,7 @@
 	//# sourceMappingURL=validators.js.map
 
 /***/ },
-/* 477 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64271,9 +64291,9 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var collection_1 = __webpack_require__(453);
-	var lang_1 = __webpack_require__(447);
-	var model_1 = __webpack_require__(457);
+	var collection_1 = __webpack_require__(455);
+	var lang_1 = __webpack_require__(449);
+	var model_1 = __webpack_require__(459);
 	var FormBuilder = (function () {
 	    function FormBuilder() {
 	    }
@@ -64345,7 +64365,7 @@
 	//# sourceMappingURL=form_builder.js.map
 
 /***/ },
-/* 478 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64357,9 +64377,9 @@
 	 */
 	"use strict";
 	var core_1 = __webpack_require__(11);
-	var directives_1 = __webpack_require__(443);
-	var radio_control_value_accessor_1 = __webpack_require__(462);
-	var form_builder_1 = __webpack_require__(477);
+	var directives_1 = __webpack_require__(445);
+	var radio_control_value_accessor_1 = __webpack_require__(464);
+	var form_builder_1 = __webpack_require__(479);
 	/**
 	 * Shorthand set of providers used for building Angular forms.
 	 * @experimental
@@ -64417,7 +64437,7 @@
 	//# sourceMappingURL=form_providers.js.map
 
 /***/ },
-/* 479 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64441,8 +64461,8 @@
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sp-app',
-	            template: __webpack_require__(480),
-	            styles: [__webpack_require__(481)]
+	            template: __webpack_require__(482),
+	            styles: [__webpack_require__(483)]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], AppComponent);
@@ -64452,584 +64472,16 @@
 
 
 /***/ },
-/* 480 */
+/* 482 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n  <div class=\"container\">\n    <nav>\n      <a [routerLink]=\"['']\">Home</a>\n      <a [routerLink]=\"['about']\">About</a>\n      <a [routerLink]=\"['plans']\">Plans</a>\n    </nav>\n  </div>\n</header>\n<main>\n  <router-outlet></router-outlet>\n</main>\n<footer>\n  Stick man from <a href=\"http://cliparts.co/clipart/3339282\">cliparts.co</a>\n</footer>\n"
 
 /***/ },
-/* 481 */
+/* 483 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  display: block; }\n\na {\n  cursor: pointer; }\n"
-
-/***/ },
-/* 482 */,
-/* 483 */,
-/* 484 */,
-/* 485 */,
-/* 486 */,
-/* 487 */,
-/* 488 */,
-/* 489 */,
-/* 490 */,
-/* 491 */,
-/* 492 */,
-/* 493 */,
-/* 494 */,
-/* 495 */,
-/* 496 */,
-/* 497 */,
-/* 498 */,
-/* 499 */,
-/* 500 */,
-/* 501 */,
-/* 502 */,
-/* 503 */,
-/* 504 */,
-/* 505 */,
-/* 506 */,
-/* 507 */,
-/* 508 */,
-/* 509 */,
-/* 510 */,
-/* 511 */,
-/* 512 */,
-/* 513 */,
-/* 514 */,
-/* 515 */,
-/* 516 */,
-/* 517 */,
-/* 518 */,
-/* 519 */,
-/* 520 */,
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */,
-/* 526 */,
-/* 527 */,
-/* 528 */,
-/* 529 */,
-/* 530 */,
-/* 531 */,
-/* 532 */,
-/* 533 */,
-/* 534 */,
-/* 535 */,
-/* 536 */,
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */,
-/* 545 */,
-/* 546 */,
-/* 547 */,
-/* 548 */,
-/* 549 */,
-/* 550 */,
-/* 551 */,
-/* 552 */,
-/* 553 */,
-/* 554 */,
-/* 555 */,
-/* 556 */,
-/* 557 */,
-/* 558 */,
-/* 559 */,
-/* 560 */,
-/* 561 */,
-/* 562 */,
-/* 563 */,
-/* 564 */,
-/* 565 */,
-/* 566 */,
-/* 567 */,
-/* 568 */,
-/* 569 */,
-/* 570 */,
-/* 571 */,
-/* 572 */,
-/* 573 */,
-/* 574 */,
-/* 575 */,
-/* 576 */,
-/* 577 */,
-/* 578 */,
-/* 579 */,
-/* 580 */,
-/* 581 */,
-/* 582 */,
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
-/* 587 */,
-/* 588 */,
-/* 589 */,
-/* 590 */,
-/* 591 */,
-/* 592 */,
-/* 593 */,
-/* 594 */,
-/* 595 */,
-/* 596 */,
-/* 597 */,
-/* 598 */,
-/* 599 */,
-/* 600 */,
-/* 601 */,
-/* 602 */,
-/* 603 */,
-/* 604 */,
-/* 605 */,
-/* 606 */,
-/* 607 */,
-/* 608 */,
-/* 609 */,
-/* 610 */,
-/* 611 */,
-/* 612 */,
-/* 613 */,
-/* 614 */,
-/* 615 */,
-/* 616 */,
-/* 617 */,
-/* 618 */,
-/* 619 */,
-/* 620 */,
-/* 621 */,
-/* 622 */,
-/* 623 */,
-/* 624 */,
-/* 625 */,
-/* 626 */,
-/* 627 */,
-/* 628 */,
-/* 629 */,
-/* 630 */,
-/* 631 */,
-/* 632 */,
-/* 633 */,
-/* 634 */,
-/* 635 */,
-/* 636 */,
-/* 637 */,
-/* 638 */,
-/* 639 */,
-/* 640 */,
-/* 641 */,
-/* 642 */,
-/* 643 */,
-/* 644 */,
-/* 645 */,
-/* 646 */,
-/* 647 */,
-/* 648 */,
-/* 649 */,
-/* 650 */,
-/* 651 */,
-/* 652 */,
-/* 653 */,
-/* 654 */,
-/* 655 */,
-/* 656 */,
-/* 657 */,
-/* 658 */,
-/* 659 */,
-/* 660 */,
-/* 661 */,
-/* 662 */,
-/* 663 */,
-/* 664 */,
-/* 665 */,
-/* 666 */,
-/* 667 */,
-/* 668 */,
-/* 669 */,
-/* 670 */,
-/* 671 */,
-/* 672 */,
-/* 673 */,
-/* 674 */,
-/* 675 */,
-/* 676 */,
-/* 677 */,
-/* 678 */,
-/* 679 */,
-/* 680 */,
-/* 681 */,
-/* 682 */,
-/* 683 */,
-/* 684 */,
-/* 685 */,
-/* 686 */,
-/* 687 */,
-/* 688 */,
-/* 689 */,
-/* 690 */,
-/* 691 */,
-/* 692 */,
-/* 693 */,
-/* 694 */,
-/* 695 */,
-/* 696 */,
-/* 697 */,
-/* 698 */,
-/* 699 */,
-/* 700 */,
-/* 701 */,
-/* 702 */,
-/* 703 */,
-/* 704 */,
-/* 705 */,
-/* 706 */,
-/* 707 */,
-/* 708 */,
-/* 709 */,
-/* 710 */,
-/* 711 */,
-/* 712 */,
-/* 713 */,
-/* 714 */,
-/* 715 */,
-/* 716 */,
-/* 717 */,
-/* 718 */,
-/* 719 */,
-/* 720 */,
-/* 721 */,
-/* 722 */,
-/* 723 */,
-/* 724 */,
-/* 725 */,
-/* 726 */,
-/* 727 */,
-/* 728 */,
-/* 729 */,
-/* 730 */,
-/* 731 */,
-/* 732 */,
-/* 733 */,
-/* 734 */,
-/* 735 */,
-/* 736 */,
-/* 737 */,
-/* 738 */,
-/* 739 */,
-/* 740 */,
-/* 741 */,
-/* 742 */,
-/* 743 */,
-/* 744 */,
-/* 745 */,
-/* 746 */,
-/* 747 */,
-/* 748 */,
-/* 749 */,
-/* 750 */,
-/* 751 */,
-/* 752 */,
-/* 753 */,
-/* 754 */,
-/* 755 */,
-/* 756 */,
-/* 757 */,
-/* 758 */,
-/* 759 */,
-/* 760 */,
-/* 761 */,
-/* 762 */,
-/* 763 */,
-/* 764 */,
-/* 765 */,
-/* 766 */,
-/* 767 */,
-/* 768 */,
-/* 769 */,
-/* 770 */,
-/* 771 */,
-/* 772 */,
-/* 773 */,
-/* 774 */,
-/* 775 */,
-/* 776 */,
-/* 777 */,
-/* 778 */,
-/* 779 */,
-/* 780 */,
-/* 781 */,
-/* 782 */,
-/* 783 */,
-/* 784 */,
-/* 785 */,
-/* 786 */,
-/* 787 */,
-/* 788 */,
-/* 789 */,
-/* 790 */,
-/* 791 */,
-/* 792 */,
-/* 793 */,
-/* 794 */,
-/* 795 */,
-/* 796 */,
-/* 797 */,
-/* 798 */,
-/* 799 */,
-/* 800 */,
-/* 801 */,
-/* 802 */,
-/* 803 */,
-/* 804 */,
-/* 805 */,
-/* 806 */,
-/* 807 */,
-/* 808 */,
-/* 809 */,
-/* 810 */,
-/* 811 */,
-/* 812 */,
-/* 813 */,
-/* 814 */,
-/* 815 */,
-/* 816 */,
-/* 817 */,
-/* 818 */,
-/* 819 */,
-/* 820 */,
-/* 821 */,
-/* 822 */,
-/* 823 */,
-/* 824 */,
-/* 825 */,
-/* 826 */,
-/* 827 */,
-/* 828 */,
-/* 829 */,
-/* 830 */,
-/* 831 */,
-/* 832 */,
-/* 833 */,
-/* 834 */,
-/* 835 */,
-/* 836 */,
-/* 837 */,
-/* 838 */,
-/* 839 */,
-/* 840 */,
-/* 841 */,
-/* 842 */,
-/* 843 */,
-/* 844 */,
-/* 845 */,
-/* 846 */,
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */,
-/* 852 */,
-/* 853 */,
-/* 854 */,
-/* 855 */,
-/* 856 */,
-/* 857 */,
-/* 858 */,
-/* 859 */,
-/* 860 */,
-/* 861 */,
-/* 862 */,
-/* 863 */,
-/* 864 */,
-/* 865 */,
-/* 866 */,
-/* 867 */,
-/* 868 */,
-/* 869 */,
-/* 870 */,
-/* 871 */,
-/* 872 */,
-/* 873 */,
-/* 874 */,
-/* 875 */,
-/* 876 */,
-/* 877 */,
-/* 878 */,
-/* 879 */,
-/* 880 */,
-/* 881 */,
-/* 882 */,
-/* 883 */,
-/* 884 */,
-/* 885 */,
-/* 886 */,
-/* 887 */,
-/* 888 */,
-/* 889 */,
-/* 890 */,
-/* 891 */,
-/* 892 */,
-/* 893 */,
-/* 894 */,
-/* 895 */,
-/* 896 */,
-/* 897 */,
-/* 898 */,
-/* 899 */,
-/* 900 */,
-/* 901 */,
-/* 902 */,
-/* 903 */,
-/* 904 */,
-/* 905 */,
-/* 906 */,
-/* 907 */,
-/* 908 */,
-/* 909 */,
-/* 910 */,
-/* 911 */,
-/* 912 */,
-/* 913 */,
-/* 914 */,
-/* 915 */,
-/* 916 */,
-/* 917 */,
-/* 918 */,
-/* 919 */,
-/* 920 */,
-/* 921 */,
-/* 922 */,
-/* 923 */,
-/* 924 */,
-/* 925 */,
-/* 926 */,
-/* 927 */,
-/* 928 */,
-/* 929 */,
-/* 930 */,
-/* 931 */,
-/* 932 */,
-/* 933 */,
-/* 934 */,
-/* 935 */,
-/* 936 */,
-/* 937 */,
-/* 938 */,
-/* 939 */,
-/* 940 */,
-/* 941 */,
-/* 942 */,
-/* 943 */,
-/* 944 */,
-/* 945 */,
-/* 946 */,
-/* 947 */,
-/* 948 */,
-/* 949 */,
-/* 950 */,
-/* 951 */,
-/* 952 */,
-/* 953 */,
-/* 954 */,
-/* 955 */,
-/* 956 */,
-/* 957 */,
-/* 958 */,
-/* 959 */,
-/* 960 */,
-/* 961 */,
-/* 962 */,
-/* 963 */,
-/* 964 */,
-/* 965 */,
-/* 966 */,
-/* 967 */,
-/* 968 */,
-/* 969 */,
-/* 970 */,
-/* 971 */,
-/* 972 */,
-/* 973 */,
-/* 974 */,
-/* 975 */,
-/* 976 */,
-/* 977 */,
-/* 978 */,
-/* 979 */,
-/* 980 */,
-/* 981 */,
-/* 982 */,
-/* 983 */,
-/* 984 */,
-/* 985 */,
-/* 986 */,
-/* 987 */,
-/* 988 */,
-/* 989 */,
-/* 990 */,
-/* 991 */,
-/* 992 */,
-/* 993 */,
-/* 994 */,
-/* 995 */,
-/* 996 */,
-/* 997 */,
-/* 998 */,
-/* 999 */,
-/* 1000 */,
-/* 1001 */,
-/* 1002 */,
-/* 1003 */,
-/* 1004 */,
-/* 1005 */,
-/* 1006 */,
-/* 1007 */,
-/* 1008 */,
-/* 1009 */,
-/* 1010 */,
-/* 1011 */,
-/* 1012 */,
-/* 1013 */,
-/* 1014 */,
-/* 1015 */,
-/* 1016 */,
-/* 1017 */,
-/* 1018 */,
-/* 1019 */,
-/* 1020 */,
-/* 1021 */,
-/* 1022 */,
-/* 1023 */,
-/* 1024 */,
-/* 1025 */,
-/* 1026 */,
-/* 1027 */,
-/* 1028 */,
-/* 1029 */,
-/* 1030 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var Plan = (function () {
-	    function Plan(name) {
-	        this.name = name;
-	    }
-	    return Plan;
-	}());
-	exports.Plan = Plan;
-
-
-/***/ },
-/* 1031 */
-/***/ function(module, exports) {
-
-	module.exports = ":host {\n  display: block;\n  padding-bottom: 3em; }\n\ntable {\n  font-size: 1.2em;\n  margin: 3em 0;\n  table-layout: fixed;\n  width: 100%; }\n  table tr {\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }\n  table td {\n    padding: 0.5em 0; }\n  table a {\n    cursor: pointer; }\n    table a.icon {\n      transition: all 0.3s ease;\n      opacity: 0.3; }\n      table a.icon:hover {\n        opacity: 1; }\n    table a.danger:hover {\n      color: #ff0000; }\n"
 
 /***/ }
 /******/ ]);

@@ -5,11 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const swig = require('swig');
+const config = require('./config/config');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+
 const plans = require('./routes/plans');
 const steps = require('./routes/steps');
+const expressJwt = require('express-jwt');
 
 var app = express();
 
@@ -33,10 +35,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+let passport = require('passport');
+app.use(passport.initialize());
+
+const initPassport = require('./passport/init');
+initPassport(passport);
+
+
 app.use('/', routes);
-app.use('/users', users);
-app.use('/api/plans/:planId/steps', steps);
-app.use('/api/plans', plans);
+app.use('/api/plans/:planId/steps', expressJwt({ secret: config.jwt.secret }), steps);
+app.use('/api/plans', expressJwt({ secret: config.jwt.secret }), plans);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,6 +60,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+    console.log(err);
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
