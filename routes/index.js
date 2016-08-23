@@ -19,7 +19,11 @@ router.post('/login', passport.authenticate('local', { session: false }), functi
 
 router.post('/account', function(req, res, next) {
   accountHelper.createAccount(req.body.email, req.body.password).then((account) => {
-    res.json(account);
+    const token = jwt.sign({ account_id: account.id }, config.jwt.secret);
+
+    res.json({
+      auth_token: token
+    });
   }).catch(next);
 });
 

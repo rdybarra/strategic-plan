@@ -7,6 +7,9 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { SignupComponent } from './signup/signup.component';
 import { StrategicPlanComponent } from './strategic-plan/strategic-plan.component';
 import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan-list.component';
 import { StrategicPlanService } from './shared/strategic-plan.service';
@@ -19,7 +22,10 @@ import { AuthService } from './auth.service';
       HomeComponent,
       AboutComponent,
       StrategicPlanComponent,
-      StrategicPlanListComponent
+      StrategicPlanListComponent,
+      LoginComponent,
+      LogoutComponent,
+      SignupComponent
     ],
     imports: [
       BrowserModule,

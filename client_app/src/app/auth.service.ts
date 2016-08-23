@@ -12,6 +12,24 @@ export class AuthService {
     this.loggedIn = Boolean(localStorage.getItem('auth_token'));
   }
 
+  signup(email, password) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('/account', JSON.stringify({ email, password }), { headers })
+      .map(res => res.json())
+      .map((res) => {
+        if (res.auth_token) {
+          localStorage.setItem('auth_token', res.auth_token);
+          this.loggedIn = true;
+          this.loginStateSource.next(true);
+          return true;
+        }
+
+        return false
+      });
+  }
+
   login(email, password) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

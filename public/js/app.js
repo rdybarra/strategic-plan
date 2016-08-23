@@ -49963,6 +49963,9 @@
 	var app_component_1 = __webpack_require__(481);
 	var home_1 = __webpack_require__(400);
 	var about_1 = __webpack_require__(404);
+	var login_component_1 = __webpack_require__(1034);
+	var logout_component_1 = __webpack_require__(1037);
+	var signup_component_1 = __webpack_require__(1039);
 	var strategic_plan_component_1 = __webpack_require__(408);
 	var strategic_plan_list_component_1 = __webpack_require__(440);
 	var strategic_plan_service_1 = __webpack_require__(412);
@@ -49978,7 +49981,10 @@
 	                home_1.HomeComponent,
 	                about_1.AboutComponent,
 	                strategic_plan_component_1.StrategicPlanComponent,
-	                strategic_plan_list_component_1.StrategicPlanListComponent
+	                strategic_plan_list_component_1.StrategicPlanListComponent,
+	                login_component_1.LoginComponent,
+	                logout_component_1.LogoutComponent,
+	                signup_component_1.SignupComponent
 	            ],
 	            imports: [
 	                platform_browser_1.BrowserModule,
@@ -50013,12 +50019,14 @@
 	var strategic_plan_list_component_1 = __webpack_require__(440);
 	var login_component_1 = __webpack_require__(1034);
 	var logout_component_1 = __webpack_require__(1037);
+	var signup_component_1 = __webpack_require__(1039);
 	var auth_guard_service_1 = __webpack_require__(1032);
 	exports.appRoutes = [
 	    { path: '', component: home_1.HomeComponent },
 	    { path: 'about', component: about_1.AboutComponent },
 	    { path: 'login', component: login_component_1.LoginComponent },
 	    { path: 'logout', component: logout_component_1.LogoutComponent },
+	    { path: 'signup', component: signup_component_1.SignupComponent },
 	    { path: 'plans/:id', component: strategic_plan_component_1.StrategicPlanComponent, canActivate: [auth_guard_service_1.AuthGuard] },
 	    { path: 'plans', component: strategic_plan_list_component_1.StrategicPlanListComponent, canActivate: [auth_guard_service_1.AuthGuard] }
 	];
@@ -64503,7 +64511,7 @@
 /* 482 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n  <div class=\"container\">\n    <nav>\n      <a [routerLink]=\"['']\">Home</a>\n      <a [routerLink]=\"['about']\">About</a>\n      <span *ngIf=\"loggedIn\">\n        <a [routerLink]=\"['plans']\">Plans</a>\n        <a [routerLink]=\"['logout']\">Logout</a>\n      </span>\n      <span *ngIf=\"!loggedIn\">\n        <a [routerLink]=\"['login']\">Login</a>\n      </span>\n    </nav>\n  </div>\n</header>\n<main>\n  <router-outlet></router-outlet>\n</main>\n<footer>\n  Stick man from <a href=\"http://cliparts.co/clipart/3339282\">cliparts.co</a>\n</footer>\n"
+	module.exports = "<header>\n  <div class=\"container\">\n    <nav>\n      <a [routerLink]=\"['']\">Home</a>\n      <a [routerLink]=\"['about']\">About</a>\n      <span *ngIf=\"loggedIn\">\n        <a [routerLink]=\"['plans']\">Plans</a>\n        <a [routerLink]=\"['logout']\">Logout</a>\n      </span>\n      <span *ngIf=\"!loggedIn\">\n        <a [routerLink]=\"['login']\">Login</a>\n        <a [routerLink]=\"['signup']\">Signup</a>\n      </span>\n    </nav>\n  </div>\n</header>\n<main>\n  <router-outlet></router-outlet>\n</main>\n<footer>\n  Stick man from <a href=\"http://cliparts.co/clipart/3339282\">cliparts.co</a>\n</footer>\n"
 
 /***/ },
 /* 483 */
@@ -65122,6 +65130,22 @@
 	        this.loginState = this.loginStateSource.asObservable();
 	        this.loggedIn = Boolean(localStorage.getItem('auth_token'));
 	    }
+	    AuthService.prototype.signup = function (email, password) {
+	        var _this = this;
+	        var headers = new http_1.Headers();
+	        headers.append('Content-Type', 'application/json');
+	        return this.http.post('/account', JSON.stringify({ email: email, password: password }), { headers: headers })
+	            .map(function (res) { return res.json(); })
+	            .map(function (res) {
+	            if (res.auth_token) {
+	                localStorage.setItem('auth_token', res.auth_token);
+	                _this.loggedIn = true;
+	                _this.loginStateSource.next(true);
+	                return true;
+	            }
+	            return false;
+	        });
+	    };
 	    AuthService.prototype.login = function (email, password) {
 	        var _this = this;
 	        var headers = new http_1.Headers();
@@ -65256,6 +65280,60 @@
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"container\">\n  <h2>You&rsquo;ve been logged out. Have a nice day!</h2>\n</div>"
+
+/***/ },
+/* 1039 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(11);
+	var router_1 = __webpack_require__(339);
+	var auth_service_1 = __webpack_require__(1033);
+	var SignupComponent = (function () {
+	    function SignupComponent(authService, router) {
+	        this.authService = authService;
+	        this.router = router;
+	    }
+	    SignupComponent.prototype.onSubmit = function () {
+	        var _this = this;
+	        if (this.password !== this.confirmPassword) {
+	            this.message = 'Your passwords do not match.';
+	            return;
+	        }
+	        this.authService.signup(this.email, this.password).subscribe(function (result) {
+	            _this.router.navigate(['/plans']);
+	        }, function (error) {
+	            if (error.status === 400) {
+	                _this.message = 'You must provide an email address and a password.';
+	            }
+	        });
+	    };
+	    SignupComponent = __decorate([
+	        core_1.Component({
+	            selector: 'sp-signup',
+	            template: __webpack_require__(1040)
+	        }), 
+	        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
+	    ], SignupComponent);
+	    return SignupComponent;
+	}());
+	exports.SignupComponent = SignupComponent;
+
+
+/***/ },
+/* 1040 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"container\">\n\n  <div class=\"message error\"><p>{{ message }}</p></div>\n\n  <form (ngSubmit)=\"onSubmit()\">\n    <div>\n      <label>\n        <span>Email</span>\n        <input [(ngModel)]=\"email\" type=\"text\" name=\"email\">\n      </label>\n    </div>\n\n    <div>\n      <label>\n        <span>Password</span>\n        <input [(ngModel)]=\"password\" type=\"password\" name=\"password\">\n      </label>\n    </div>\n\n    <div>\n      <label>\n        <span>Confirm Password</span>\n        <input [(ngModel)]=\"confirmPassword\" type=\"password\" name=\"confirm_password\">\n      </label>\n    </div>\n\n    <button type=\"submit\">Submit</button>\n  </form>\n</div>"
 
 /***/ }
 /******/ ]);

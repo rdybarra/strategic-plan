@@ -6,6 +6,7 @@ import { StrategicPlanComponent } from './strategic-plan/strategic-plan.componen
 import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan-list.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './auth-guard.service';
 
 export const appRoutes: Routes = [
@@ -13,6 +14,7 @@ export const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'plans/:id', component: StrategicPlanComponent, canActivate: [AuthGuard]},
   { path: 'plans', component: StrategicPlanListComponent, canActivate: [AuthGuard]}
 ];
