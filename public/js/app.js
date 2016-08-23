@@ -49966,6 +49966,8 @@
 	var strategic_plan_component_1 = __webpack_require__(408);
 	var strategic_plan_list_component_1 = __webpack_require__(440);
 	var strategic_plan_service_1 = __webpack_require__(412);
+	var auth_guard_service_1 = __webpack_require__(1032);
+	var auth_service_1 = __webpack_require__(1033);
 	var AppModule = (function () {
 	    function AppModule() {
 	    }
@@ -49986,7 +49988,9 @@
 	            ],
 	            providers: [
 	                app_routing_1.appRoutingProviders,
-	                strategic_plan_service_1.StrategicPlanService
+	                strategic_plan_service_1.StrategicPlanService,
+	                auth_guard_service_1.AuthGuard,
+	                auth_service_1.AuthService
 	            ],
 	            bootstrap: [app_component_1.AppComponent],
 	        }), 
@@ -50007,11 +50011,16 @@
 	var about_1 = __webpack_require__(404);
 	var strategic_plan_component_1 = __webpack_require__(408);
 	var strategic_plan_list_component_1 = __webpack_require__(440);
+	var login_component_1 = __webpack_require__(1034);
+	var logout_component_1 = __webpack_require__(1037);
+	var auth_guard_service_1 = __webpack_require__(1032);
 	exports.appRoutes = [
 	    { path: '', component: home_1.HomeComponent },
 	    { path: 'about', component: about_1.AboutComponent },
-	    { path: 'plans/:id', component: strategic_plan_component_1.StrategicPlanComponent },
-	    { path: 'plans', component: strategic_plan_list_component_1.StrategicPlanListComponent }
+	    { path: 'login', component: login_component_1.LoginComponent },
+	    { path: 'logout', component: logout_component_1.LogoutComponent },
+	    { path: 'plans/:id', component: strategic_plan_component_1.StrategicPlanComponent, canActivate: [auth_guard_service_1.AuthGuard] },
+	    { path: 'plans', component: strategic_plan_list_component_1.StrategicPlanListComponent, canActivate: [auth_guard_service_1.AuthGuard] }
 	];
 	// Why do we need providers for routing?
 	exports.appRoutingProviders = [];
@@ -64451,12 +64460,15 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(11);
-	/*
-	 * App Component
-	 * Top Level Component
-	 */
+	var auth_service_1 = __webpack_require__(1033);
 	var AppComponent = (function () {
-	    function AppComponent() {
+	    function AppComponent(authService) {
+	        var _this = this;
+	        this.authService = authService;
+	        this.loggedIn = this.authService.isLoggedIn();
+	        authService.loginState.subscribe(function (loggedIn) {
+	            _this.loggedIn = loggedIn;
+	        });
 	    }
 	    AppComponent = __decorate([
 	        core_1.Component({
@@ -64464,7 +64476,7 @@
 	            template: __webpack_require__(482),
 	            styles: [__webpack_require__(483)]
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [auth_service_1.AuthService])
 	    ], AppComponent);
 	    return AppComponent;
 	}());
@@ -64475,13 +64487,759 @@
 /* 482 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n  <div class=\"container\">\n    <nav>\n      <a [routerLink]=\"['']\">Home</a>\n      <a [routerLink]=\"['about']\">About</a>\n      <a [routerLink]=\"['plans']\">Plans</a>\n    </nav>\n  </div>\n</header>\n<main>\n  <router-outlet></router-outlet>\n</main>\n<footer>\n  Stick man from <a href=\"http://cliparts.co/clipart/3339282\">cliparts.co</a>\n</footer>\n"
+	module.exports = "<header>\n  <div class=\"container\">\n    <nav>\n      <a [routerLink]=\"['']\">Home</a>\n      <a [routerLink]=\"['about']\">About</a>\n      <span *ngIf=\"loggedIn\">\n        <a [routerLink]=\"['plans']\">Plans</a>\n        <a [routerLink]=\"['logout']\">Logout</a>\n      </span>\n      <span *ngIf=\"!loggedIn\">\n        <a [routerLink]=\"['login']\">Login</a>\n      </span>\n    </nav>\n  </div>\n</header>\n<main>\n  <router-outlet></router-outlet>\n</main>\n<footer>\n  Stick man from <a href=\"http://cliparts.co/clipart/3339282\">cliparts.co</a>\n</footer>\n"
 
 /***/ },
 /* 483 */
 /***/ function(module, exports) {
 
 	module.exports = ":host {\n  display: block; }\n\na {\n  cursor: pointer; }\n"
+
+/***/ },
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */,
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */,
+/* 597 */,
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */,
+/* 606 */,
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */,
+/* 611 */,
+/* 612 */,
+/* 613 */,
+/* 614 */,
+/* 615 */,
+/* 616 */,
+/* 617 */,
+/* 618 */,
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */,
+/* 623 */,
+/* 624 */,
+/* 625 */,
+/* 626 */,
+/* 627 */,
+/* 628 */,
+/* 629 */,
+/* 630 */,
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */,
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */,
+/* 645 */,
+/* 646 */,
+/* 647 */,
+/* 648 */,
+/* 649 */,
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */,
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */,
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */,
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */,
+/* 693 */,
+/* 694 */,
+/* 695 */,
+/* 696 */,
+/* 697 */,
+/* 698 */,
+/* 699 */,
+/* 700 */,
+/* 701 */,
+/* 702 */,
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */,
+/* 708 */,
+/* 709 */,
+/* 710 */,
+/* 711 */,
+/* 712 */,
+/* 713 */,
+/* 714 */,
+/* 715 */,
+/* 716 */,
+/* 717 */,
+/* 718 */,
+/* 719 */,
+/* 720 */,
+/* 721 */,
+/* 722 */,
+/* 723 */,
+/* 724 */,
+/* 725 */,
+/* 726 */,
+/* 727 */,
+/* 728 */,
+/* 729 */,
+/* 730 */,
+/* 731 */,
+/* 732 */,
+/* 733 */,
+/* 734 */,
+/* 735 */,
+/* 736 */,
+/* 737 */,
+/* 738 */,
+/* 739 */,
+/* 740 */,
+/* 741 */,
+/* 742 */,
+/* 743 */,
+/* 744 */,
+/* 745 */,
+/* 746 */,
+/* 747 */,
+/* 748 */,
+/* 749 */,
+/* 750 */,
+/* 751 */,
+/* 752 */,
+/* 753 */,
+/* 754 */,
+/* 755 */,
+/* 756 */,
+/* 757 */,
+/* 758 */,
+/* 759 */,
+/* 760 */,
+/* 761 */,
+/* 762 */,
+/* 763 */,
+/* 764 */,
+/* 765 */,
+/* 766 */,
+/* 767 */,
+/* 768 */,
+/* 769 */,
+/* 770 */,
+/* 771 */,
+/* 772 */,
+/* 773 */,
+/* 774 */,
+/* 775 */,
+/* 776 */,
+/* 777 */,
+/* 778 */,
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */,
+/* 783 */,
+/* 784 */,
+/* 785 */,
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */,
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */,
+/* 799 */,
+/* 800 */,
+/* 801 */,
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */,
+/* 807 */,
+/* 808 */,
+/* 809 */,
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */,
+/* 814 */,
+/* 815 */,
+/* 816 */,
+/* 817 */,
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */,
+/* 826 */,
+/* 827 */,
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */,
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */,
+/* 859 */,
+/* 860 */,
+/* 861 */,
+/* 862 */,
+/* 863 */,
+/* 864 */,
+/* 865 */,
+/* 866 */,
+/* 867 */,
+/* 868 */,
+/* 869 */,
+/* 870 */,
+/* 871 */,
+/* 872 */,
+/* 873 */,
+/* 874 */,
+/* 875 */,
+/* 876 */,
+/* 877 */,
+/* 878 */,
+/* 879 */,
+/* 880 */,
+/* 881 */,
+/* 882 */,
+/* 883 */,
+/* 884 */,
+/* 885 */,
+/* 886 */,
+/* 887 */,
+/* 888 */,
+/* 889 */,
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */,
+/* 894 */,
+/* 895 */,
+/* 896 */,
+/* 897 */,
+/* 898 */,
+/* 899 */,
+/* 900 */,
+/* 901 */,
+/* 902 */,
+/* 903 */,
+/* 904 */,
+/* 905 */,
+/* 906 */,
+/* 907 */,
+/* 908 */,
+/* 909 */,
+/* 910 */,
+/* 911 */,
+/* 912 */,
+/* 913 */,
+/* 914 */,
+/* 915 */,
+/* 916 */,
+/* 917 */,
+/* 918 */,
+/* 919 */,
+/* 920 */,
+/* 921 */,
+/* 922 */,
+/* 923 */,
+/* 924 */,
+/* 925 */,
+/* 926 */,
+/* 927 */,
+/* 928 */,
+/* 929 */,
+/* 930 */,
+/* 931 */,
+/* 932 */,
+/* 933 */,
+/* 934 */,
+/* 935 */,
+/* 936 */,
+/* 937 */,
+/* 938 */,
+/* 939 */,
+/* 940 */,
+/* 941 */,
+/* 942 */,
+/* 943 */,
+/* 944 */,
+/* 945 */,
+/* 946 */,
+/* 947 */,
+/* 948 */,
+/* 949 */,
+/* 950 */,
+/* 951 */,
+/* 952 */,
+/* 953 */,
+/* 954 */,
+/* 955 */,
+/* 956 */,
+/* 957 */,
+/* 958 */,
+/* 959 */,
+/* 960 */,
+/* 961 */,
+/* 962 */,
+/* 963 */,
+/* 964 */,
+/* 965 */,
+/* 966 */,
+/* 967 */,
+/* 968 */,
+/* 969 */,
+/* 970 */,
+/* 971 */,
+/* 972 */,
+/* 973 */,
+/* 974 */,
+/* 975 */,
+/* 976 */,
+/* 977 */,
+/* 978 */,
+/* 979 */,
+/* 980 */,
+/* 981 */,
+/* 982 */,
+/* 983 */,
+/* 984 */,
+/* 985 */,
+/* 986 */,
+/* 987 */,
+/* 988 */,
+/* 989 */,
+/* 990 */,
+/* 991 */,
+/* 992 */,
+/* 993 */,
+/* 994 */,
+/* 995 */,
+/* 996 */,
+/* 997 */,
+/* 998 */,
+/* 999 */,
+/* 1000 */,
+/* 1001 */,
+/* 1002 */,
+/* 1003 */,
+/* 1004 */,
+/* 1005 */,
+/* 1006 */,
+/* 1007 */,
+/* 1008 */,
+/* 1009 */,
+/* 1010 */,
+/* 1011 */,
+/* 1012 */,
+/* 1013 */,
+/* 1014 */,
+/* 1015 */,
+/* 1016 */,
+/* 1017 */,
+/* 1018 */,
+/* 1019 */,
+/* 1020 */,
+/* 1021 */,
+/* 1022 */,
+/* 1023 */,
+/* 1024 */,
+/* 1025 */,
+/* 1026 */,
+/* 1027 */,
+/* 1028 */,
+/* 1029 */,
+/* 1030 */,
+/* 1031 */,
+/* 1032 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(11);
+	var router_1 = __webpack_require__(339);
+	var auth_service_1 = __webpack_require__(1033);
+	var AuthGuard = (function () {
+	    function AuthGuard(authService, router) {
+	        this.authService = authService;
+	        this.router = router;
+	    }
+	    AuthGuard.prototype.canActivate = function () {
+	        if (this.authService.isLoggedIn()) {
+	            return true;
+	        }
+	        this.router.navigate(['/login']);
+	        return false;
+	    };
+	    AuthGuard = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
+	    ], AuthGuard);
+	    return AuthGuard;
+	}());
+	exports.AuthGuard = AuthGuard;
+
+
+/***/ },
+/* 1033 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(11);
+	var http_1 = __webpack_require__(413);
+	var Subject_1 = __webpack_require__(69);
+	var AuthService = (function () {
+	    function AuthService(http) {
+	        this.http = http;
+	        this.loggedIn = false;
+	        this.loginStateSource = new Subject_1.Subject();
+	        this.loginState = this.loginStateSource.asObservable();
+	        this.loggedIn = Boolean(localStorage.getItem('auth_token'));
+	    }
+	    AuthService.prototype.login = function (email, password) {
+	        var _this = this;
+	        var headers = new http_1.Headers();
+	        headers.append('Content-Type', 'application/json');
+	        return this.http
+	            .post('/login', JSON.stringify({ email: email, password: password }), { headers: headers })
+	            .map(function (res) { return res.json(); })
+	            .map(function (res) {
+	            if (res.auth_token) {
+	                localStorage.setItem('auth_token', res.auth_token);
+	                _this.loggedIn = true;
+	                _this.loginStateSource.next(true);
+	                return true;
+	            }
+	            return false;
+	        });
+	    };
+	    AuthService.prototype.logout = function () {
+	        localStorage.removeItem('auth_token');
+	        this.loggedIn = false;
+	        this.loginStateSource.next(false);
+	    };
+	    AuthService.prototype.isLoggedIn = function () {
+	        return this.loggedIn;
+	    };
+	    AuthService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [http_1.Http])
+	    ], AuthService);
+	    return AuthService;
+	}());
+	exports.AuthService = AuthService;
+
+
+/***/ },
+/* 1034 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(11);
+	var router_1 = __webpack_require__(339);
+	var auth_service_1 = __webpack_require__(1033);
+	var LoginComponent = (function () {
+	    function LoginComponent(authService, router) {
+	        this.authService = authService;
+	        this.router = router;
+	    }
+	    LoginComponent.prototype.onSubmit = function () {
+	        var _this = this;
+	        this.authService.login(this.email, this.password).subscribe(function (result) {
+	            _this.router.navigate(['/plans']);
+	        }, function (error) {
+	            if (error.status === 400) {
+	                _this.message = 'You must provide an email address and a password.';
+	            }
+	            else {
+	                if (error.status === 401) {
+	                    _this.message = 'The email address/password combo does not work.';
+	                }
+	            }
+	        });
+	    };
+	    LoginComponent = __decorate([
+	        core_1.Component({
+	            selector: 'login',
+	            template: __webpack_require__(1035)
+	        }), 
+	        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
+	    ], LoginComponent);
+	    return LoginComponent;
+	}());
+	exports.LoginComponent = LoginComponent;
+
+
+/***/ },
+/* 1035 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"container\">\n\n  <div class=\"message error\"><p>{{ message }}</p></div>\n\n  <form (ngSubmit)=\"onSubmit()\">\n    <div>\n      <label>\n        <span>Email</span>\n        <input [(ngModel)]=\"email\" type=\"text\" name=\"email\">\n      </label>\n    </div>\n\n    <div>\n      <label>\n        <span>Password</span>\n        <input [(ngModel)]=\"password\" type=\"password\" name=\"password\">\n      </label>\n    </div>\n\n    <button type=\"submit\">Submit</button>\n  </form>\n</div>"
+
+/***/ },
+/* 1036 */,
+/* 1037 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(11);
+	var router_1 = __webpack_require__(339);
+	var auth_service_1 = __webpack_require__(1033);
+	var LogoutComponent = (function () {
+	    function LogoutComponent(authService, router) {
+	        this.authService = authService;
+	        this.router = router;
+	        this.authService.logout();
+	    }
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Boolean)
+	    ], LogoutComponent.prototype, "loggedIn", void 0);
+	    LogoutComponent = __decorate([
+	        core_1.Component({
+	            selector: 'sp-logout',
+	            template: __webpack_require__(1038)
+	        }), 
+	        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
+	    ], LogoutComponent);
+	    return LogoutComponent;
+	}());
+	exports.LogoutComponent = LogoutComponent;
+
+
+/***/ },
+/* 1038 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"container\">\n  <h2>You&rsquo;ve been logged out. Have a nice day!</h2>\n</div>"
 
 /***/ }
 /******/ ]);

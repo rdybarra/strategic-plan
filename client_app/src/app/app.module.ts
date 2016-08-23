@@ -10,6 +10,8 @@ import { AboutComponent } from './about';
 import { StrategicPlanComponent } from './strategic-plan/strategic-plan.component';
 import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan-list.component';
 import { StrategicPlanService } from './shared/strategic-plan.service';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { StrategicPlanService } from './shared/strategic-plan.service';
     ],
     providers: [
       appRoutingProviders,
-      StrategicPlanService
+      StrategicPlanService,
+      AuthGuard,
+      AuthService
     ],
     bootstrap: [AppComponent],
 })

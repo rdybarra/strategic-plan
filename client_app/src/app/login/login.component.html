@@ -1,0 +1,22 @@
+<div class="container">
+
+  <div class="message error"><p>{{ message }}</p></div>
+
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label>
+        <span>Email</span>
+        <input [(ngModel)]="email" type="text" name="email">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <span>Password</span>
+        <input [(ngModel)]="password" type="password" name="password">
+      </label>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
