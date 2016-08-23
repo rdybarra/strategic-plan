@@ -56362,15 +56362,18 @@
 	        this.apiEndpoint = '/api/plans';
 	    }
 	    StrategicPlanService.prototype.getPlans = function () {
-	        return this.http.get(this.apiEndpoint)
+	        var headers = this.getStandardHeaders();
+	        // body because: https://www.reddit.com/r/Angular2/comments/4x0mxt/rc5_error_when_using_http_service/
+	        return this.http.get(this.apiEndpoint, { headers: headers, body: '' })
 	            .toPromise()
 	            .then(function (response) {
+	            console.log(response);
 	            return response.json();
-	        })
-	            .catch(this.handleError);
+	        }).catch(this.handleError);
 	    };
 	    StrategicPlanService.prototype.getPlan = function (id) {
-	        return this.http.get(this.apiEndpoint + '/' + id)
+	        var headers = this.getStandardHeaders();
+	        return this.http.get(this.apiEndpoint + '/' + id, { headers: headers, body: '' })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
@@ -56378,46 +56381,59 @@
 	    };
 	    StrategicPlanService.prototype.createPlan = function () {
 	        var plan = new plan_1.Plan('Untitled');
-	        return this.http.post(this.apiEndpoint, plan)
+	        var headers = this.getStandardHeaders();
+	        return this.http.post(this.apiEndpoint, null, { headers: headers, body: plan })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
 	        });
 	    };
 	    StrategicPlanService.prototype.updatePlan = function (plan) {
-	        return this.http.patch(this.apiEndpoint + '/' + plan.id, plan)
+	        var headers = this.getStandardHeaders();
+	        return this.http.patch(this.apiEndpoint + '/' + plan.id, null, { headers: headers, body: plan })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
 	        });
 	    };
 	    StrategicPlanService.prototype.deletePlan = function (plan) {
-	        return this.http.delete(this.apiEndpoint + '/' + plan.id)
+	        var headers = this.getStandardHeaders();
+	        return this.http.delete(this.apiEndpoint + '/' + plan.id, { headers: headers, body: '' })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
 	        });
 	    };
 	    StrategicPlanService.prototype.createStep = function (step) {
-	        return this.http.post(this.apiEndpoint + '/' + step.planId + '/steps/', step)
+	        var headers = this.getStandardHeaders();
+	        return this.http.post(this.apiEndpoint + '/' + step.planId + '/steps/', null, { headers: headers, body: step })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
 	        });
 	    };
 	    StrategicPlanService.prototype.updateStep = function (step) {
-	        return this.http.patch(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id, step)
+	        var headers = this.getStandardHeaders();
+	        return this.http.patch(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id, null, { headers: headers, body: step })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
 	        });
 	    };
 	    StrategicPlanService.prototype.deleteStep = function (step) {
-	        return this.http.delete(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id)
+	        var headers = this.getStandardHeaders();
+	        return this.http.delete(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id, { headers: headers, body: '' })
 	            .toPromise()
 	            .then(function (response) {
 	            return response.json();
 	        });
+	    };
+	    StrategicPlanService.prototype.getStandardHeaders = function () {
+	        var headers = new http_1.Headers();
+	        headers.append('Content-type', 'application/json');
+	        var authToken = localStorage.getItem('auth_token');
+	        headers.append('Authorization', "Bearer " + authToken);
+	        return headers;
 	    };
 	    StrategicPlanService.prototype.handleError = function (error) {
 	        console.error('An error occurred', error);

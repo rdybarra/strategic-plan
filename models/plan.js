@@ -12,5 +12,6 @@ const Plan = thinky.createModel('Plan', {
 });
 
 Plan.hasMany(Step, 'steps', 'id', 'planId')
+Step.belongsTo(Plan, 'plan', 'planId', 'id');
 
 module.exports = Plan;

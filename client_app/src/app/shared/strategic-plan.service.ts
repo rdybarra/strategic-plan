@@ -12,16 +12,20 @@ export class StrategicPlanService {
   constructor(private http: Http) { }
 
   getPlans() {
-    return this.http.get(this.apiEndpoint)
+    const headers = this.getStandardHeaders();
+    // body because: https://www.reddit.com/r/Angular2/comments/4x0mxt/rc5_error_when_using_http_service/
+    return this.http.get(this.apiEndpoint, { headers: headers, body: ''})
                .toPromise()
                .then(response => {
+                 console.log(response);
                  return response.json() as Plan[];
-               })
-               .catch(this.handleError);
+               }).catch(this.handleError);
   }
 
   getPlan(id: string) {
-    return this.http.get(this.apiEndpoint + '/' + id)
+    const headers = this.getStandardHeaders();
+
+    return this.http.get(this.apiEndpoint + '/' + id, { headers: headers, body: ''})
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
@@ -30,8 +34,9 @@ export class StrategicPlanService {
 
   createPlan() {
     const plan = new Plan('Untitled');
+    const headers = this.getStandardHeaders();
 
-    return this.http.post(this.apiEndpoint, plan)
+    return this.http.post(this.apiEndpoint, null, { headers: headers, body: plan })
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
@@ -39,7 +44,9 @@ export class StrategicPlanService {
   }
 
   updatePlan(plan: Plan) {
-    return this.http.patch(this.apiEndpoint + '/' + plan.id, plan)
+    const headers = this.getStandardHeaders();
+
+    return this.http.patch(this.apiEndpoint + '/' + plan.id, null, { headers: headers, body: plan})
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
@@ -47,7 +54,9 @@ export class StrategicPlanService {
   }
 
   deletePlan(plan: Plan) {
-    return this.http.delete(this.apiEndpoint + '/' + plan.id)
+    const headers = this.getStandardHeaders();
+
+    return this.http.delete(this.apiEndpoint + '/' + plan.id, { headers: headers, body: ''})
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
@@ -55,7 +64,9 @@ export class StrategicPlanService {
   }
 
   createStep(step: Step) {
-    return this.http.post(this.apiEndpoint + '/' + step.planId + '/steps/', step)
+    const headers = this.getStandardHeaders();
+
+    return this.http.post(this.apiEndpoint + '/' + step.planId + '/steps/', null, { headers: headers, body: step})
                .toPromise()
                .then(response => {
                  return response.json() as Step;
@@ -63,7 +74,9 @@ export class StrategicPlanService {
   }
 
   updateStep(step: Step) {
-    return this.http.patch(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id, step)
+    const headers = this.getStandardHeaders();
+
+    return this.http.patch(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id, null, { headers: headers, body: step})
                .toPromise()
                .then(response => {
                  return response.json() as Step;
@@ -71,11 +84,22 @@ export class StrategicPlanService {
   }
 
   deleteStep(step: Step) {
-    return this.http.delete(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id)
+    const headers = this.getStandardHeaders();
+
+    return this.http.delete(this.apiEndpoint + '/' + step.planId + '/steps/' + step.id, { headers: headers, body: ''})
                .toPromise()
                .then(response => {
                  return response.json() as Step;
                });
+  }
+
+  private getStandardHeaders() {
+    let headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    let authToken = localStorage.getItem('auth_token');
+    headers.append('Authorization', `Bearer ${authToken}`);
+
+    return headers;
   }
 
   private handleError(error: any) {
