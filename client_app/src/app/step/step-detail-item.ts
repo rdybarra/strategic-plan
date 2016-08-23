@@ -1,9 +1,13 @@
 export class StepDetailItem {
   name: string;
+  value: string;
   label: string;
+  order: number;
 
-  constructor(name: string) {
+  constructor(name, value, order) {
     this.name = name;
+    this.value = value;
+    this.order = order;
 
     switch (this.name) {
       case 'description':

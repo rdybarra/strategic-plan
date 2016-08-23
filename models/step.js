@@ -7,7 +7,7 @@ const Step = thinky.createModel('Step', {
   id: type.string(),
   planId: type.string(),
   name: type.string().min(1).required(),
-  description: type.object(),
+  description: type.array(),
   completed: type.boolean().default(false),
   created: type.date().default(r.now())
 });

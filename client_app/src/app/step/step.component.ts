@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Step } from './step';
-import { StepDetailItem } from './step-detail-item';
 import { StrategicPlanService } from '../shared/strategic-plan.service';
 
 @Component({
@@ -8,25 +7,15 @@ import { StrategicPlanService } from '../shared/strategic-plan.service';
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.scss']
 })
-export class StepComponent implements OnInit {
+export class StepComponent {
   @Input() step: Step;
   @Output() onDeleteStep = new EventEmitter<Step>();
   open: boolean;
   editing: boolean;
-  stepDetailItems: StepDetailItem[];
 
   constructor(private strategicPlanService: StrategicPlanService) {
     this.open = false;
     this.editing = false;
-    this.stepDetailItems = [];
-  }
-
-  ngOnInit() {
-    for (let item in this.step.description) {
-      if (this.step.description.hasOwnProperty(item)) {
-        this.stepDetailItems.push(new StepDetailItem(item));
-      }
-    }
   }
 
   onOpen() {

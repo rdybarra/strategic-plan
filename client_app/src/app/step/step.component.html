@@ -4,10 +4,10 @@
   <div *ngIf="step.completed === false">
     <div class="step__detail">
 
-      <div *ngFor="let item of stepDetailItems">
+      <div *ngFor="let item of step.description">
         <div class="step__detail__item">
           <div class="step__detail__item__header" [innerHTML]="item.label"></div>
-          <p>{{ step.description[item.name] }}</p>
+          <p>{{ item.value }}</p>
         </div>
       </div>
 
@@ -44,14 +44,14 @@
       </div>
 
       <div class="step__detail">
-        <div *ngFor="let item of stepDetailItems">
+        <div *ngFor="let item of step.description">
           <div class="step__detail__item">
             <div class="step__detail__item__header" [innerHTML]="item.label"></div>
             <div class="step__detail__item__value">
-              <p>{{ step.description[item.name] }}</p>
+              <p>{{ item.value }}</p>
             </div>
             <div class="step__detail__item__edit-field">
-              <textarea [(ngModel)]="step.description[item.name]" name="{{ item.name }}" placeholder="..."></textarea>
+              <textarea [(ngModel)]="item.value" name="{{ item.name }}" placeholder="..."></textarea>
             </div>
           </div>
         </div>

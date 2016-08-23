@@ -56196,7 +56196,6 @@
 	};
 	var core_1 = __webpack_require__(11);
 	var step_1 = __webpack_require__(410);
-	var step_detail_item_1 = __webpack_require__(411);
 	var strategic_plan_service_1 = __webpack_require__(412);
 	var StepComponent = (function () {
 	    function StepComponent(strategicPlanService) {
@@ -56204,15 +56203,7 @@
 	        this.onDeleteStep = new core_1.EventEmitter();
 	        this.open = false;
 	        this.editing = false;
-	        this.stepDetailItems = [];
 	    }
-	    StepComponent.prototype.ngOnInit = function () {
-	        for (var item in this.step.description) {
-	            if (this.step.description.hasOwnProperty(item)) {
-	                this.stepDetailItems.push(new step_detail_item_1.StepDetailItem(item));
-	            }
-	        }
-	    };
 	    StepComponent.prototype.onOpen = function () {
 	        var body = document.getElementsByTagName('body').item(0);
 	        body.style.overflow = 'hidden';
@@ -56285,23 +56276,24 @@
 
 /***/ },
 /* 410 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+	var step_detail_item_1 = __webpack_require__(411);
 	var Step = (function () {
 	    function Step(planId, order) {
 	        this.planId = planId;
 	        this.order = order;
 	        this.name = '';
-	        this.description = {
-	            description: '',
-	            due: '',
-	            motivation: '',
-	            demotivation: '',
-	            threats: '',
-	            strengths: '',
-	            success: ''
-	        };
+	        this.description = [
+	            new step_detail_item_1.StepDetailItem('description', '', 0),
+	            new step_detail_item_1.StepDetailItem('due', '', 1),
+	            new step_detail_item_1.StepDetailItem('motivation', '', 2),
+	            new step_detail_item_1.StepDetailItem('demotivation', '', 3),
+	            new step_detail_item_1.StepDetailItem('threats', '', 4),
+	            new step_detail_item_1.StepDetailItem('strengths', '', 5),
+	            new step_detail_item_1.StepDetailItem('success', '', 6)
+	        ];
 	        this.completed = false;
 	    }
 	    return Step;
@@ -56315,8 +56307,10 @@
 
 	"use strict";
 	var StepDetailItem = (function () {
-	    function StepDetailItem(name) {
+	    function StepDetailItem(name, value, order) {
 	        this.name = name;
+	        this.value = value;
+	        this.order = order;
 	        switch (this.name) {
 	            case 'description':
 	                this.label = '<i class="fa fa-play" aria-hidden="true"></i> I will...';
@@ -59671,7 +59665,7 @@
 /* 436 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"step\">\n  <div class=\"step__title\" (click)=\"onOpen()\">{{ step.name }} <i class=\"accent-icon fa fa-arrow-circle-o-right\" aria-hidden=\"true\"></i></div>\n\n  <div *ngIf=\"step.completed === false\">\n    <div class=\"step__detail\">\n\n      <div *ngFor=\"let item of stepDetailItems\">\n        <div class=\"step__detail__item\">\n          <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n          <p>{{ step.description[item.name] }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"step.completed === true\">\n    <div class=\"step__detail--completed\">\n      <i class=\"step__detail__banner fa fa-trophy\" aria-hidden=\"true\"></i>\n    </div>\n  </div>\n\n</section>\n\n <div class=\"view-wrapper\" [class.open]=\"open === true\" [class.editing]=\"editing === true\">\n    <section class=\"view\">\n      <section class=\"view__controls\">\n        <i class=\"fa fa-times view__controls__close\" aria-hidden=\"true\" (click)=\"onClose()\"></i>\n        <div *ngIf=\"editing === false\">\n          <i class=\"fa fa-pencil view__controls__edit\" aria-hidden=\"true\" (click)=\"onEdit()\"></i>\n        </div>\n        <div *ngIf=\"editing === true\">\n          <i class=\"fa fa-check view__controls__save\" aria-hidden=\"true\" (click)=\"onSave()\"></i>\n        </div>\n      </section>\n\n      <div class=\"step__detail__header\">\n        <div class=\"step__detail__item__value\">\n          <h2>{{ step.name }}</h2>\n        </div>\n        <div class=\"step__detail__item__edit-field\">\n          <input type=\"text\" [(ngModel)]=\"step.name\" name=\"name\" placeholder=\"... step name\">\n        </div>\n      </div>\n\n      <div class=\"step__detail\">\n        <div *ngFor=\"let item of stepDetailItems\">\n          <div class=\"step__detail__item\">\n            <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n            <div class=\"step__detail__item__value\">\n              <p>{{ step.description[item.name] }}</p>\n            </div>\n            <div class=\"step__detail__item__edit-field\">\n              <textarea [(ngModel)]=\"step.description[item.name]\" name=\"{{ item.name }}\" placeholder=\"...\"></textarea>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class=\"center\">\n        <div *ngIf=\"step.completed === true\">\n          <button class=\"on-dark\" (click)=\"onIncomplete()\">Mark as incomplete</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n        <div *ngIf=\"step.completed === false\">\n          <button class=\"on-dark\" (click)=\"onComplete()\">Mark as completed</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n      </div>\n    </section>\n  </div>\n"
+	module.exports = "<section class=\"step\">\n  <div class=\"step__title\" (click)=\"onOpen()\">{{ step.name }} <i class=\"accent-icon fa fa-arrow-circle-o-right\" aria-hidden=\"true\"></i></div>\n\n  <div *ngIf=\"step.completed === false\">\n    <div class=\"step__detail\">\n\n      <div *ngFor=\"let item of step.description\">\n        <div class=\"step__detail__item\">\n          <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n          <p>{{ item.value }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"step.completed === true\">\n    <div class=\"step__detail--completed\">\n      <i class=\"step__detail__banner fa fa-trophy\" aria-hidden=\"true\"></i>\n    </div>\n  </div>\n\n</section>\n\n <div class=\"view-wrapper\" [class.open]=\"open === true\" [class.editing]=\"editing === true\">\n    <section class=\"view\">\n      <section class=\"view__controls\">\n        <i class=\"fa fa-times view__controls__close\" aria-hidden=\"true\" (click)=\"onClose()\"></i>\n        <div *ngIf=\"editing === false\">\n          <i class=\"fa fa-pencil view__controls__edit\" aria-hidden=\"true\" (click)=\"onEdit()\"></i>\n        </div>\n        <div *ngIf=\"editing === true\">\n          <i class=\"fa fa-check view__controls__save\" aria-hidden=\"true\" (click)=\"onSave()\"></i>\n        </div>\n      </section>\n\n      <div class=\"step__detail__header\">\n        <div class=\"step__detail__item__value\">\n          <h2>{{ step.name }}</h2>\n        </div>\n        <div class=\"step__detail__item__edit-field\">\n          <input type=\"text\" [(ngModel)]=\"step.name\" name=\"name\" placeholder=\"... step name\">\n        </div>\n      </div>\n\n      <div class=\"step__detail\">\n        <div *ngFor=\"let item of step.description\">\n          <div class=\"step__detail__item\">\n            <div class=\"step__detail__item__header\" [innerHTML]=\"item.label\"></div>\n            <div class=\"step__detail__item__value\">\n              <p>{{ item.value }}</p>\n            </div>\n            <div class=\"step__detail__item__edit-field\">\n              <textarea [(ngModel)]=\"item.value\" name=\"{{ item.name }}\" placeholder=\"...\"></textarea>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class=\"center\">\n        <div *ngIf=\"step.completed === true\">\n          <button class=\"on-dark\" (click)=\"onIncomplete()\">Mark as incomplete</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n        <div *ngIf=\"step.completed === false\">\n          <button class=\"on-dark\" (click)=\"onComplete()\">Mark as completed</button>\n          <button class=\"danger\" (click)=\"onDelete(step)\">Delete</button>\n        </div>\n\n      </div>\n    </section>\n  </div>\n"
 
 /***/ },
 /* 437 */
