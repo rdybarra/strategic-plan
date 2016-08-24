@@ -1,29 +1,33 @@
-<div class="container">
+<div class="container--with-padding">
 
-  <div class="message error"><p>{{ message }}</p></div>
+  <div class="content-block">
+    <div class="message error"><p>{{ message }}</p></div>
 
-  <form (ngSubmit)="onSubmit()">
-    <div>
-      <label>
-        <span>Email</span>
-        <input [(ngModel)]="email" type="text" name="email">
-      </label>
-    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label>
+          <span>Email</span>
+          <input [(ngModel)]="email" type="text" name="email">
+        </label>
+        <p class="description">This will be your username. We won't give your email address to anyone.</p>
+      </div>
 
-    <div>
-      <label>
-        <span>Password</span>
-        <input [(ngModel)]="password" type="password" name="password">
-      </label>
-    </div>
+      <div>
+        <label>
+          <span>Password</span>
+          <input [(ngModel)]="password" type="password" name="password">
+        </label>
+      </div>
 
-    <div>
-      <label>
-        <span>Confirm Password</span>
-        <input [(ngModel)]="confirmPassword" type="password" name="confirm_password">
-      </label>
-    </div>
+      <div>
+        <label>
+          <span>Confirm Password</span>
+          <input [(ngModel)]="confirmPassword" type="password" name="confirm_password">
+        </label>
+      </div>
 
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Signup</button>
+    </form>
+
+  </div>
 </div>

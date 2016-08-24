@@ -49966,6 +49966,7 @@
 	var login_component_1 = __webpack_require__(1034);
 	var logout_component_1 = __webpack_require__(1037);
 	var signup_component_1 = __webpack_require__(1039);
+	var styleguide_component_1 = __webpack_require__(1041);
 	var strategic_plan_component_1 = __webpack_require__(408);
 	var strategic_plan_list_component_1 = __webpack_require__(440);
 	var strategic_plan_service_1 = __webpack_require__(412);
@@ -49984,7 +49985,8 @@
 	                strategic_plan_list_component_1.StrategicPlanListComponent,
 	                login_component_1.LoginComponent,
 	                logout_component_1.LogoutComponent,
-	                signup_component_1.SignupComponent
+	                signup_component_1.SignupComponent,
+	                styleguide_component_1.StyleguideComponent
 	            ],
 	            imports: [
 	                platform_browser_1.BrowserModule,
@@ -50020,6 +50022,7 @@
 	var login_component_1 = __webpack_require__(1034);
 	var logout_component_1 = __webpack_require__(1037);
 	var signup_component_1 = __webpack_require__(1039);
+	var styleguide_component_1 = __webpack_require__(1041);
 	var auth_guard_service_1 = __webpack_require__(1032);
 	exports.appRoutes = [
 	    { path: '', component: home_1.HomeComponent },
@@ -50028,7 +50031,8 @@
 	    { path: 'logout', component: logout_component_1.LogoutComponent },
 	    { path: 'signup', component: signup_component_1.SignupComponent },
 	    { path: 'plans/:id', component: strategic_plan_component_1.StrategicPlanComponent, canActivate: [auth_guard_service_1.AuthGuard] },
-	    { path: 'plans', component: strategic_plan_list_component_1.StrategicPlanListComponent, canActivate: [auth_guard_service_1.AuthGuard] }
+	    { path: 'plans', component: strategic_plan_list_component_1.StrategicPlanListComponent, canActivate: [auth_guard_service_1.AuthGuard] },
+	    { path: 'styleguide', component: styleguide_component_1.StyleguideComponent }
 	];
 	// Why do we need providers for routing?
 	exports.appRoutingProviders = [];
@@ -56026,9 +56030,6 @@
 	var HomeComponent = (function () {
 	    function HomeComponent() {
 	    }
-	    HomeComponent.prototype.ngOnInit = function () {
-	        console.log('Hello Home');
-	    };
 	    HomeComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sp-home',
@@ -56046,13 +56047,13 @@
 /* 402 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n\n  <h1>Ergo opifex plus sibi proponet ad formarum quam civis excellens ad factorum pulchritudinem?</h1>\n\n  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href='http://loripsum.net/' target='_blank'>Sit enim idem caecus, debilis.</a> <i>Non igitur bene.</i> Summae mihi videtur inscitiae. <mark>Duo Reges: constructio interrete.</mark> </p>\n\n  <p>Quae cum dixisset paulumque institisset, Quid est? Cave putes quicquam esse verius. An ea, quae per vinitorem antea consequebatur, per se ipsa curabit? Cum autem negant ea quicquam ad beatam vitam pertinere, rursus naturam relinquunt. </p>\n\n  <ol>\n    <li>Beatus sibi videtur esse moriens.</li>\n    <li>Quis suae urbis conservatorem Codrum, quis Erechthei filias non maxime laudat?</li>\n    <li>Occultum facinus esse potuerit, gaudebit;</li>\n    <li>Nec tamen ille erat sapiens quis enim hoc aut quando aut ubi aut unde?</li>\n  </ol>\n\n\n  <p><b>Bestiarum vero nullum iudicium puto.</b> Duae sunt enim res quoque, ne tu verba solum putes. Quonam, inquit, modo? Mihi enim erit isdem istis fortasse iam utendum. Haec dicuntur inconstantissime. <b>Quae est igitur causa istarum angustiarum?</b> </p>\n\n  <p>Est enim effectrix multarum et magnarum voluptatum. Incommoda autem et commoda-ita enim estmata et dustmata appello-communia esse voluerunt, paria noluerunt. Oratio me istius philosophi non offendit; Ea possunt paria non esse. Nondum autem explanatum satis, erat, quid maxime natura vellet. Quae animi affectio suum cuique tribuens atque hanc, quam dico. </p>\n\n  <p>Frater et T. <i>Quo modo autem philosophus loquitur?</i> Nam, ut paulo ante docui, augendae voluptatis finis est doloris omnis amotio. <mark>Et non ex maxima parte de tota iudicabis?</mark> Murenam te accusante defenderem. </p>\n\n  <ul>\n    <li>Quarum ambarum rerum cum medicinam pollicetur, luxuriae licentiam pollicetur.</li>\n    <li>Quamquam tu hanc copiosiorem etiam soles dicere.</li>\n    <li>Consequentia exquirere, quoad sit id, quod volumus, effectum.</li>\n    <li>Ut optime, secundum naturam affectum esse possit.</li>\n  </ul>\n\n\n  <h2>Heading 2</h2>\n  <h3>Heading 3</h3>\n  <h4>Heading 4</h4>\n  <h5>Heading 5</h5>\n  <h6>Heading 6</h6>\n\n</div>\n"
+	module.exports = "<div class=\"container--with-padding\">\n  <h1>Welcome to the Strategic Plan maker</h1>\n  <p>A place for personal strategic plans.</p>\n\n  <img src=\"/img/plan-image.jpg\" alt=\"This is a picture from inside the app\">\n\n  <a [routerLink]=\"['signup']\">Signup</a> or <a [routerLink]=\"['login']\">login</a> to get started.\n</div>\n"
 
 /***/ },
 /* 403 */
 /***/ function(module, exports) {
 
-	module.exports = "\n"
+	module.exports = "img {\n  width: 100%;\n  margin-bottom: 2em; }\n"
 
 /***/ },
 /* 404 */
@@ -56104,7 +56105,7 @@
 /* 406 */
 /***/ function(module, exports) {
 
-	module.exports = "<p>\n</p>\n"
+	module.exports = "<div class=\"container--with-padding\">\n  <h1>About this site&hellip;</h1>\n\n  <p>This site was created by a programmer trying to learn a new technology. Namely, <a href=\"https://angular.io/\">Angular2</a>. The source code can be viewed on <a href=\"https://github.com/rdybarra/strategic-plan\">github</a>.</p>\n\n  <p>Since this a tool for my personal education (and use!) and is not a commercial endeaver, I am unable to make any commitments in terms of help, support, or feature requests. Though, I will definitely hear you out and look forward to hearing from you.</p>\n\n  <p>I take pride in making functional tools. So let me know if you've found this one to be helpful.</p>\n\n  <p>You can reach me on twitter <a href=\"https://twitter.com/rickyybarra\">@rickyybarra</a>.</p>\n\n  <p>I'm sorry the plan layout doesn't work so well on small screens (mobile). Responsive design wasn't a goal of the project, but I plan to improve it.</p>\n</div>"
 
 /***/ },
 /* 407 */
@@ -56168,7 +56169,7 @@
 	    };
 	    StrategicPlanComponent = __decorate([
 	        core_1.Component({
-	            selector: 'my-home',
+	            selector: 'sp-plan',
 	            template: __webpack_require__(438),
 	            styles: [__webpack_require__(439)],
 	            directives: [step_component_1.StepComponent]
@@ -59683,7 +59684,7 @@
 /* 439 */
 /***/ function(module, exports) {
 
-	module.exports = ":host {\n  display: block; }\n\n.steps,\n.dynamic-steps {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  align-items: flex-end;\n  padding-top: 3em; }\n\n.dynamic-steps {\n  /* Make room for the starting and final steps... and a little breathing room */\n  width: calc(100% - 3.125em - 3.125em - (2 * 3em)); }\n\n.one-1 {\n  width: calc(100% - 0em); }\n\n.one-2 {\n  width: calc(50% - 1.5em); }\n\n.one-3 {\n  width: calc(33.33333% - 2em); }\n\n.one-4 {\n  width: calc(25% - 2.25em); }\n\n.one-5 {\n  width: calc(20% - 2.4em); }\n\n.one-6 {\n  width: calc(16.66667% - 2.5em); }\n\n.one-7 {\n  width: calc(14.28571% - 2.57143em); }\n\n.starting-step {\n  background: #78684E;\n  width: 3.125em;\n  height: 25em;\n  color: #ffffff;\n  border-top-right-radius: 10px; }\n  .starting-step:before {\n    display: block;\n    content: ' ';\n    width: 40px;\n    height: 50px;\n    background-image: url(\"/img/stick-running.svg\");\n    background-size: cover;\n    position: relative;\n    top: -32px;\n    left: 18px; }\n\n.final-step {\n  border-top-left-radius: 10px;\n  background: #798616;\n  width: 3.125em;\n  height: 25em; }\n\n.below-steps {\n  background: #3a3226;\n  height: 2em; }\n\n.step-wrapper {\n  position: relative; }\n\n.add-step, .add-first-step {\n  text-align: center;\n  position: absolute;\n  right: -3em;\n  width: 3em;\n  top: 10em;\n  cursor: pointer;\n  padding: 1em 0;\n  transition: all 0.3s ease;\n  opacity: 0.3; }\n  .add-step:hover, .add-first-step:hover {\n    opacity: 1; }\n\n.add-first-step {\n  left: -3em;\n  right: auto; }\n\n.no-steps {\n  height: 18.75em;\n  text-align: center;\n  width: 100%; }\n  .no-steps h2 {\n    cursor: pointer;\n    display: inline-block; }\n\n.plan-header {\n  max-width: 37.5em;\n  margin: 0 auto; }\n  .plan-header__title {\n    text-align: center; }\n    .plan-header__title i {\n      cursor: pointer;\n      opacity: 0.3;\n      transition: opacity 0.3s ease; }\n      .plan-header__title i:hover {\n        opacity: 1; }\n  .plan-header__title--editing {\n    display: none;\n    width: 100%;\n    /* Match H1 styles */\n    font-size: 2em;\n    font-family: 'Lora', serif;\n    font-weight: bold;\n    margin: 0.67em auto; }\n    .plan-header__title--editing i {\n      display: inline-block;\n      cursor: pointer;\n      width: 1.5em;\n      text-align: center; }\n    .plan-header__title--editing input {\n      /* Leave room for the \"save\" icon */\n      width: calc(100% - 2em);\n      max-width: 550px; }\n  .plan-header.editing .plan-header__title {\n    display: none; }\n  .plan-header.editing .plan-header__title--editing {\n    display: block; }\n"
+	module.exports = ":host {\n  display: block;\n  margin-bottom: -1em; }\n\n.steps,\n.dynamic-steps {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  align-items: flex-end;\n  padding-top: 3em; }\n\n.dynamic-steps {\n  /* Make room for the starting and final steps... and a little breathing room */\n  width: calc(100% - 3.125em - 3.125em - (2 * 3em)); }\n\n.one-1 {\n  width: calc(100% - 0em); }\n\n.one-2 {\n  width: calc(50% - 1.5em); }\n\n.one-3 {\n  width: calc(33.33333% - 2em); }\n\n.one-4 {\n  width: calc(25% - 2.25em); }\n\n.one-5 {\n  width: calc(20% - 2.4em); }\n\n.one-6 {\n  width: calc(16.66667% - 2.5em); }\n\n.one-7 {\n  width: calc(14.28571% - 2.57143em); }\n\n.starting-step {\n  background: #78684E;\n  width: 3.125em;\n  height: 25em;\n  color: #ffffff;\n  border-top-right-radius: 10px; }\n  .starting-step:before {\n    display: block;\n    content: ' ';\n    width: 40px;\n    height: 50px;\n    background-image: url(\"/img/stick-running.svg\");\n    background-size: cover;\n    position: relative;\n    top: -32px;\n    left: 18px; }\n\n.final-step {\n  border-top-left-radius: 10px;\n  background: #798616;\n  width: 3.125em;\n  height: 25em; }\n\n.below-steps {\n  background: #3a3226;\n  height: 2em; }\n\n.step-wrapper {\n  position: relative; }\n\n.add-step, .add-first-step {\n  text-align: center;\n  position: absolute;\n  right: -3em;\n  width: 3em;\n  top: 10em;\n  cursor: pointer;\n  padding: 1em 0;\n  transition: all 0.3s ease;\n  opacity: 0.3; }\n  .add-step:hover, .add-first-step:hover {\n    opacity: 1; }\n\n.add-first-step {\n  left: -3em;\n  right: auto; }\n\n.no-steps {\n  height: 18.75em;\n  text-align: center;\n  width: 100%; }\n  .no-steps h2 {\n    cursor: pointer;\n    display: inline-block; }\n\n.plan-header {\n  max-width: 37.5em;\n  margin: 0 auto; }\n  .plan-header__title {\n    text-align: center; }\n    .plan-header__title i {\n      cursor: pointer;\n      opacity: 0.3;\n      transition: opacity 0.3s ease; }\n      .plan-header__title i:hover {\n        opacity: 1; }\n  .plan-header__title--editing {\n    display: none;\n    width: 100%;\n    /* Match H1 styles */\n    font-size: 2em;\n    font-family: 'Lora', serif;\n    font-weight: bold;\n    margin: 0.67em auto; }\n    .plan-header__title--editing i {\n      display: inline-block;\n      cursor: pointer;\n      width: 1.5em;\n      text-align: center; }\n    .plan-header__title--editing input {\n      /* Leave room for the \"save\" icon */\n      width: calc(100% - 2em);\n      max-width: 550px; }\n  .plan-header.editing .plan-header__title {\n    display: none; }\n  .plan-header.editing .plan-header__title--editing {\n    display: block; }\n"
 
 /***/ },
 /* 440 */
@@ -59750,7 +59751,7 @@
 /* 441 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n  <button (click)=\"onCreate()\">Create a new Plan</button>\n\n  <table>\n    <tr *ngFor=\"let plan of plans\">\n      <td><a routerLink=\"/plans/{{ plan.id }}\">{{ plan.name }}</a></td>\n      <td>\n        <a class=\"icon\" routerLink=\"/plans/{{ plan.id }}\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\n        <a class=\"icon danger\" (click)=\"onDelete(plan)\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n      </td>\n    </tr>\n  </table>\n</div>"
+	module.exports = "<div class=\"container--with-padding\">\n  <button (click)=\"onCreate()\">Create a new Plan</button>\n\n  <div *ngIf=\"plans && plans.length == 0\">\n    <h2>No plans&hellip; yet.</h2>\n  </div>\n\n  <table>\n    <tr *ngFor=\"let plan of plans\">\n      <td><a routerLink=\"/plans/{{ plan.id }}\">{{ plan.name }}</a></td>\n      <td>\n        <a class=\"icon\" routerLink=\"/plans/{{ plan.id }}\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\n        <a class=\"icon danger\" (click)=\"onDelete(plan)\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n      </td>\n    </tr>\n  </table>\n</div>"
 
 /***/ },
 /* 442 */
@@ -65213,7 +65214,7 @@
 	    };
 	    LoginComponent = __decorate([
 	        core_1.Component({
-	            selector: 'login',
+	            selector: 'sp-login',
 	            template: __webpack_require__(1035)
 	        }), 
 	        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
@@ -65227,7 +65228,7 @@
 /* 1035 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n\n  <div class=\"message error\"><p>{{ message }}</p></div>\n\n  <form (ngSubmit)=\"onSubmit()\">\n    <div>\n      <label>\n        <span>Email</span>\n        <input [(ngModel)]=\"email\" type=\"text\" name=\"email\">\n      </label>\n    </div>\n\n    <div>\n      <label>\n        <span>Password</span>\n        <input [(ngModel)]=\"password\" type=\"password\" name=\"password\">\n      </label>\n    </div>\n\n    <button type=\"submit\">Submit</button>\n  </form>\n</div>"
+	module.exports = "<div class=\"container--with-padding\">\n  <div class=\"content-block\">\n    <div class=\"message error\"><p>{{ message }}</p></div>\n\n    <form (ngSubmit)=\"onSubmit()\">\n      <div>\n        <label>\n          <span>Email</span>\n          <input [(ngModel)]=\"email\" type=\"text\" name=\"email\">\n        </label>\n      </div>\n\n      <div>\n        <label>\n          <span>Password</span>\n          <input [(ngModel)]=\"password\" type=\"password\" name=\"password\">\n        </label>\n      </div>\n\n      <button type=\"submit\">Login</button>\n    </form>\n  </div>\n</div>"
 
 /***/ },
 /* 1036 */,
@@ -65248,15 +65249,12 @@
 	var router_1 = __webpack_require__(339);
 	var auth_service_1 = __webpack_require__(1033);
 	var LogoutComponent = (function () {
+	    // @Input() loggedIn: boolean;
 	    function LogoutComponent(authService, router) {
 	        this.authService = authService;
 	        this.router = router;
 	        this.authService.logout();
 	    }
-	    __decorate([
-	        core_1.Input(), 
-	        __metadata('design:type', Boolean)
-	    ], LogoutComponent.prototype, "loggedIn", void 0);
 	    LogoutComponent = __decorate([
 	        core_1.Component({
 	            selector: 'sp-logout',
@@ -65273,7 +65271,7 @@
 /* 1038 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n  <h2>You&rsquo;ve been logged out. Have a nice day!</h2>\n</div>"
+	module.exports = "<div class=\"container--with-padding\">\n  <h2>You&rsquo;ve been logged out. Have a nice day!</h2>\n</div>"
 
 /***/ },
 /* 1039 */
@@ -65327,7 +65325,43 @@
 /* 1040 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\n\n  <div class=\"message error\"><p>{{ message }}</p></div>\n\n  <form (ngSubmit)=\"onSubmit()\">\n    <div>\n      <label>\n        <span>Email</span>\n        <input [(ngModel)]=\"email\" type=\"text\" name=\"email\">\n      </label>\n    </div>\n\n    <div>\n      <label>\n        <span>Password</span>\n        <input [(ngModel)]=\"password\" type=\"password\" name=\"password\">\n      </label>\n    </div>\n\n    <div>\n      <label>\n        <span>Confirm Password</span>\n        <input [(ngModel)]=\"confirmPassword\" type=\"password\" name=\"confirm_password\">\n      </label>\n    </div>\n\n    <button type=\"submit\">Submit</button>\n  </form>\n</div>"
+	module.exports = "<div class=\"container--with-padding\">\n\n  <div class=\"content-block\">\n    <div class=\"message error\"><p>{{ message }}</p></div>\n\n    <form (ngSubmit)=\"onSubmit()\">\n      <div>\n        <label>\n          <span>Email</span>\n          <input [(ngModel)]=\"email\" type=\"text\" name=\"email\">\n        </label>\n        <p class=\"description\">This will be your username. We won't give your email address to anyone.</p>\n      </div>\n\n      <div>\n        <label>\n          <span>Password</span>\n          <input [(ngModel)]=\"password\" type=\"password\" name=\"password\">\n        </label>\n      </div>\n\n      <div>\n        <label>\n          <span>Confirm Password</span>\n          <input [(ngModel)]=\"confirmPassword\" type=\"password\" name=\"confirm_password\">\n        </label>\n      </div>\n\n      <button type=\"submit\">Signup</button>\n    </form>\n\n  </div>\n</div>"
+
+/***/ },
+/* 1041 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(11);
+	var StyleguideComponent = (function () {
+	    function StyleguideComponent() {
+	    }
+	    StyleguideComponent = __decorate([
+	        core_1.Component({
+	            selector: 'sp-styleguide',
+	            template: __webpack_require__(1042)
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], StyleguideComponent);
+	    return StyleguideComponent;
+	}());
+	exports.StyleguideComponent = StyleguideComponent;
+
+
+/***/ },
+/* 1042 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"container\">\n\n  <h1>Ergo opifex plus sibi proponet ad formarum quam civis excellens ad factorum pulchritudinem?</h1>\n\n  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href='http://loripsum.net/' target='_blank'>Sit enim idem caecus, debilis.</a> <i>Non igitur bene.</i> Summae mihi videtur inscitiae. <mark>Duo Reges: constructio interrete.</mark> </p>\n\n  <p>Quae cum dixisset paulumque institisset, Quid est? Cave putes quicquam esse verius. An ea, quae per vinitorem antea consequebatur, per se ipsa curabit? Cum autem negant ea quicquam ad beatam vitam pertinere, rursus naturam relinquunt. </p>\n\n  <ol>\n    <li>Beatus sibi videtur esse moriens.</li>\n    <li>Quis suae urbis conservatorem Codrum, quis Erechthei filias non maxime laudat?</li>\n    <li>Occultum facinus esse potuerit, gaudebit;</li>\n    <li>Nec tamen ille erat sapiens quis enim hoc aut quando aut ubi aut unde?</li>\n  </ol>\n\n\n  <p><b>Bestiarum vero nullum iudicium puto.</b> Duae sunt enim res quoque, ne tu verba solum putes. Quonam, inquit, modo? Mihi enim erit isdem istis fortasse iam utendum. Haec dicuntur inconstantissime. <b>Quae est igitur causa istarum angustiarum?</b> </p>\n\n  <p>Est enim effectrix multarum et magnarum voluptatum. Incommoda autem et commoda-ita enim estmata et dustmata appello-communia esse voluerunt, paria noluerunt. Oratio me istius philosophi non offendit; Ea possunt paria non esse. Nondum autem explanatum satis, erat, quid maxime natura vellet. Quae animi affectio suum cuique tribuens atque hanc, quam dico. </p>\n\n  <p>Frater et T. <i>Quo modo autem philosophus loquitur?</i> Nam, ut paulo ante docui, augendae voluptatis finis est doloris omnis amotio. <mark>Et non ex maxima parte de tota iudicabis?</mark> Murenam te accusante defenderem. </p>\n\n  <ul>\n    <li>Quarum ambarum rerum cum medicinam pollicetur, luxuriae licentiam pollicetur.</li>\n    <li>Quamquam tu hanc copiosiorem etiam soles dicere.</li>\n    <li>Consequentia exquirere, quoad sit id, quod volumus, effectum.</li>\n    <li>Ut optime, secundum naturam affectum esse possit.</li>\n  </ul>\n\n\n  <h2>Heading 2</h2>\n  <h3>Heading 3</h3>\n  <h4>Heading 4</h4>\n  <h5>Heading 5</h5>\n  <h6>Heading 6</h6>\n\n</div>"
 
 /***/ }
 /******/ ]);

@@ -7,7 +7,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './logout.component.html'
 })
 export class LogoutComponent {
-  @Input() loggedIn: boolean;
+  // @Input() loggedIn: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.logout();

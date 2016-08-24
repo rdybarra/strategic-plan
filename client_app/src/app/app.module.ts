@@ -10,6 +10,7 @@ import { AboutComponent } from './about';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SignupComponent } from './signup/signup.component';
+import { StyleguideComponent } from './styleguide/styleguide.component';
 import { StrategicPlanComponent } from './strategic-plan/strategic-plan.component';
 import { StrategicPlanListComponent } from './strategic-plan-list/strategic-plan-list.component';
 import { StrategicPlanService } from './shared/strategic-plan.service';
@@ -25,7 +26,8 @@ import { AuthService } from './auth.service';
       StrategicPlanListComponent,
       LoginComponent,
       LogoutComponent,
-      SignupComponent
+      SignupComponent,
+      StyleguideComponent
     ],
     imports: [
       BrowserModule,

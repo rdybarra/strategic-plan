@@ -11,6 +11,7 @@ main {
     color: #333;
     min-height: 5em;
     padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 header {
@@ -35,7 +36,7 @@ header {
 footer {
   text-align: center;
   font-size: 0.8em;
-  padding: 1em 0 6em 0;
+  padding: 2em 0 6em 0;
 
   a:hover {
       color: #ffffff
@@ -45,6 +46,17 @@ footer {
 .container {
     max-width: 62.5em;
     padding: 0 1em;
+    margin: 0 auto;
+
+    &--with-padding {
+        @extend .container;
+        padding: 3em 1em;
+    }
+}
+
+.content-block {
+    width: 100%;
+    max-width: 36em;
     margin: 0 auto;
 }
 
@@ -60,6 +72,47 @@ a {
 
 .center {
     text-align: center;
+}
+
+form {
+    padding-bottom: 2em;
+
+    label {
+        display: block;
+        margin: 0.5em 0;
+        width: 100%;
+
+        & > span {
+            display: block;
+            min-width: 9em;
+            float: left;
+            line-height: 2em;
+            height: 2em;
+        }
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        display: block;
+        box-sizing: border-box;
+        width: calc(100% - 9em);
+        margin-left: 9em;
+        line-height: 2em;
+    }
+
+    .description {
+        box-sizing: border-box;
+        font-size: 0.8em;
+        font-style: italic;
+        width: calc(100% - 9em*1.25);
+        margin-left: 9em*1.25;
+        margin-bottom: 2em;
+    }
+
+    button {
+        margin: 1em 0;
+        float: right;
+    }
 }
 
 button {

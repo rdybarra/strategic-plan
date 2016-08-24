@@ -8,7 +8,7 @@ import { Plan } from './plan';
 import { StrategicPlanService } from '../shared/strategic-plan.service';
 
 @Component({
-  selector: 'my-home',
+  selector: 'sp-plan',
   templateUrl: './strategic-plan.component.html',
   styleUrls: ['./strategic-plan.component.scss'],
   directives: [StepComponent]
