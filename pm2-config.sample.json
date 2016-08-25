@@ -1,0 +1,8 @@
+{
+  "name"             : "sp",
+  "script"           : "current/bin/www",
+  "exec_interpreter" : "node",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
