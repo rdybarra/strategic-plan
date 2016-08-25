@@ -5,6 +5,8 @@
 
 This app is node (express) on the back-end, and Angular2 (with Typescript, via Weback) on the front end. It's a playground where I can learn Angular2.
 
+See it (and use it!) in action: http://sp.rdybarra.com/
+
 ## Installation
 1. [Install rethinkdb](https://www.rethinkdb.com/docs/install/)
 2. [Install browsersync](https://www.browsersync.io/docs#installation)
@@ -24,12 +26,13 @@ THe basics are in place. The only missing *essential* is
 * password resets
 
 Some ideas to make the project better are:
+
 1. Define the goal with more clarity
 2. Add SWOT (Strengths, Weaknesses, Opportunities, Threats)
-6. Interactivity such as email reminders
-3. The ability to re-order steps
-4. Be able to customize step components (the leading questions)
-5. Burning Questions
+3. Interactivity such as email reminders
+4. The ability to re-order steps
+5. Be able to customize step components (the leading questions)
+6. Burning Questions
 
 ## Explanations for things you might notice
 
@@ -52,5 +55,5 @@ I keep my node server up and running with a great utility called [pm2](http://pm
 ### Why is there a file called nginx-config.sample?
 Again, as an example of a complete app, I'm showing how I actually execute the code with nginx. This is what the cool kids called a reverse-proxy.  For a more verbose explanation see [my blog post](http://dev.rdybarra.com/2015/07/20/Serving-a-node-app-with-nginx/)
 
-# Thanks for reading
+## Thanks for reading
 Feel free to say hello, open issues, or reach out to me on twitter at [@rickyybarra](https://twitter.com/RickyYbarra).
