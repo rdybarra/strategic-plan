@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "gulp serve & webpack --watch",
-    "build": "gulp & webpack",
+    "build": "gulp & NODE_ENV=build webpack",
     "postinstall": "typings install"
   },
   "license": "ISC",
@@ -33,6 +33,6 @@
     "ts-loader": "^0.8.1",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
-    "webpack": "^1.12.13"
+    "webpack": "^1.13.2"
   }
 }

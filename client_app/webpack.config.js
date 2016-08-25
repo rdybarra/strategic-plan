@@ -43,12 +43,22 @@ module.exports = {
       {
         test: /\.html$/, loader: 'raw-loader'
       }
-    ],
-    plugins: [
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: '../public/js/vendor.js'
-      }),
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js'
+    }),
+    new webpack.DefinePlugin({
+      '__ENV__': JSON.stringify(process.env.NODE_ENV || 'dev')
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      mangle: false
+    })
+  ]
 };
