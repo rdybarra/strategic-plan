@@ -3,7 +3,7 @@
 
 ---
 
-This app is node (express) on the back-end, and angular2 on the front end. It's a playground where I can learn Angular2.
+This app is node (express) on the back-end, and Angular2 (with Typescript, via Weback) on the front end. It's a playground where I can learn Angular2.
 
 ## Installation
 1. [Install rethinkdb](https://www.rethinkdb.com/docs/install/)
@@ -11,14 +11,46 @@ This app is node (express) on the back-end, and angular2 on the front end. It's 
 3. `$ npm install` at root.
 4. `$ npm install` within `client_app`.
 
-## Usage
+## Usage in development
 1. Ensure rethinkdb is running with default dev settings: `$ rethinkdb`
 2. `$ npm start`
-3. `% npm run start-client`
+3. `$ npm run start-client`
 
-## Progress
-In the progress of transition to being able to do CRUD on plan steps that wasn't persisted to actually hitting the DB. Currently you can RUD. Key todos:
+## Deplyment build
+`$ npm run build` within `client_app`.
 
-1. Add ability to persist Created steps.
-2. CRUD on plans.
-3. Expose UI necessary to add 2nd step. The current UI lets you add steps to plans that have 0 or 2+ steps.
+## Roadmap
+THe basics are in place. The only missing *essential* is
+* password resets
+
+Some ideas to make the project better are:
+1. Define the goal with more clarity
+2. Add SWOT (Strengths, Weaknesses, Opportunities, Threats)
+6. Interactivity such as email reminders
+3. The ability to re-order steps
+4. Be able to customize step components (the leading questions)
+5. Burning Questions
+
+## Explanations for things you might notice
+
+### Why is there a Gemfile (Capistrano)?
+I use [Capistrano](http://capistranorb.com/) for deployment. The additional files you would see are `Gemfile` `Capfile`, everything in `lib/capistrano` `config/deploy.rb` and everything `config/deploy` (not in repo).
+
+Capistrano lets me deploy my code to my server, and run various important
+tasks like `npm install`.
+
+### Why aren't you building your assets upon deployment?
+So the ideal deployment would compile all my public Javascript and CSS. This is fairly easy to achieve with Capistrano. If you do so, there is no need to include the `public/css` and the `public/js` folders since those are built as part of the deployment process.
+
+However, since this app is deployed on a tiny server with limited memory, I found that it was a lot easier to just build locally. It also makes the deployments quicker.
+
+The only risk I run is that I don't properly build the assets before doing a deployment. While that would suck, for me it's not quite worth it for this application.
+
+### Why is there a file called pm2-config.sample.json?
+I keep my node server up and running with a great utility called [pm2](http://pm2.keymetrics.io/). The sample file is my config that I use to run it. It really is not tied to this codebase, but I wanted to include it since this is an example of complete app. The file (less `.sample`) resides at the base directory (from capistranos standpoint). For a more verbose explanation see [my blog post](http://dev.rdybarra.com/2015/07/20/Serving-a-node-app-with-nginx/) (scroll towards the bottom).
+
+### Why is there a file called nginx-config.sample?
+Again, as an example of a complete app, I'm showing how I actually execute the code with nginx. This is what the cool kids called a reverse-proxy.  For a more verbose explanation see [my blog post](http://dev.rdybarra.com/2015/07/20/Serving-a-node-app-with-nginx/)
+
+# Thanks for reading
+Feel free to say hello, open issues, or reach out to me on twitter at [@rickyybarra](https://twitter.com/RickyYbarra).
