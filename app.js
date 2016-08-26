@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 const swig = require('swig');
 const config = require('./config/config');
 
-var routes = require('./routes/index');
-
+const routes = require('./routes/index');
+const forgot = require('./routes/forgot');
 const plans = require('./routes/plans');
 const steps = require('./routes/steps');
 const expressJwt = require('express-jwt');
@@ -42,8 +42,8 @@ app.use(passport.initialize());
 const initPassport = require('./passport/init');
 initPassport(passport);
 
-
 app.use('/', routes);
+app.use('/forgot', forgot);
 app.use('/api/plans/:planId/steps', expressJwt({ secret: config.jwt.secret }), steps);
 app.use('/api/plans', expressJwt({ secret: config.jwt.secret }), plans);
 

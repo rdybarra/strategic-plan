@@ -1,0 +1,24 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+<main>
+  <div class="container--with-padding">
+    <div class="content-block">
+      <h2>So&hellip; you forgot your password?</h2>
+      <p>Cheer up! Enter your email address below and that will kick off the process of resetting your passowrd.</p>
+
+      <p>&hellip; or you can try to <a href="/#/login">login again</a>.</p>
+
+      <br><br>
+
+      <form method="post">
+        <label><span>Email</span>
+          <input type="email" name="email" placeholder="email@example.com" required>
+        </label>
+        <p class="description">You will receive an email with a special link to reset your password. We use your email to ensure a nefarious party doesn't change your password.</p>
+        <button type="submit">Send reset email</button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,5 +1,4 @@
-'use strict'
-
+/* eslint-disable new-cap */
 const express = require('express');
 const router = express.Router({mergeParams: true});
 const Step = require('../models/step');

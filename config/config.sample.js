@@ -9,7 +9,10 @@ if (process.env.NODE_ENV === 'production') {
     },
     jwt: {
       secret: ''
-    }
+    },
+    replyToEmail: '',
+    sendingEmail: '',
+    url: ''
   };
 } else {
   config = {
@@ -20,7 +23,10 @@ if (process.env.NODE_ENV === 'production') {
     },
     jwt: {
       secret: ''
-    }
+    },
+    replyToEmail: '',
+    sendingEmail: '',
+    url: 'http://localhost:3000',
   };
 
   if (process.env.NODE_ENV === 'test') {
