@@ -1,5 +1,4 @@
-'use strict'
-
+/* eslint-disable new-cap */
 const express = require('express');
 const router = express.Router();
 const Plan = require('../models/plan');
@@ -7,7 +6,7 @@ const AuthorizationError = require('../lib/authorization-error');
 const routeHelper = require('./route-helper');
 
 router.get('/', function allPlansRoute(req, res, next) {
-  Plan.filter({ accountId: req.user.account_id }).getJoin().run().then(function allPlansDbCallback(plans) {
+  Plan.filter({ accountId: req.user.accountId }).getJoin().run().then(function allPlansDbCallback(plans) {
     res.json(plans);
   }).catch(next);
 });
@@ -15,7 +14,7 @@ router.get('/', function allPlansRoute(req, res, next) {
 router.post('/', function postPlanRoute(req, res, next) {
   let plan = new Plan({
     name: req.body.name,
-    accountId: req.user.account_id
+    accountId: req.user.accountId
   });
 
   plan.save().then(function postPlanDbCallback(plan) {
@@ -26,7 +25,7 @@ router.post('/', function postPlanRoute(req, res, next) {
 router.get('/:planId', function getPlanRoute(req, res, next) {
   Plan.get(req.params.planId).getJoin({
     steps: {
-      _apply: function(sequence) {
+      _apply: function orderPlanSteps(sequence) {
         return sequence.orderBy('order');
       }
     }

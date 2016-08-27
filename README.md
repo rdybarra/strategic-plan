@@ -22,8 +22,7 @@ See it (and use it!) in action: http://sp.rdybarra.com/
 `$ npm run build` within `client_app`.
 
 ## Roadmap
-THe basics are in place. The only missing *essential* is
-* password resets
+THe basics are in place.
 
 Some ideas to make the project better are:
 
@@ -33,8 +32,12 @@ Some ideas to make the project better are:
 4. The ability to re-order steps
 5. Be able to customize step components (the leading questions)
 6. Burning Questions
+7. Publically viewable plans
 
 ## Explanations for things you might notice
+
+### Why is the password reset flow outside of Angular?
+For any of those routes, I need to pass the data to the server. Encoding/Decoding requires a secret key as does sending off an email. Querying and updating the database also happens uniquely on the server. It just felt like Angular was an uneccesary layer on top of all these things. If the circumstances of the project were different, it might be worth it to just pass data down to the server from an Angular component (for consistency and UX sake), but this project doesn't need that.
 
 ### Why is there a Gemfile (Capistrano)?
 I use [Capistrano](http://capistranorb.com/) for deployment. The additional files you would see are `Gemfile` `Capfile`, everything in `lib/capistrano` `config/deploy.rb` and everything `config/deploy` (not in repo).
