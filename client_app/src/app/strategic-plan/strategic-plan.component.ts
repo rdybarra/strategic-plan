@@ -49,7 +49,7 @@ export class StrategicPlanComponent implements OnInit {
         this.strategicPlanService.getPlan(id).then(plan => {
           this.plan = plan;
           this.steps = plan.steps;
-        });
+        }).catch(error => {});
       }
     });
   }

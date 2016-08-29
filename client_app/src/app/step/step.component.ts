@@ -47,7 +47,7 @@ export class StepComponent {
       this.strategicPlanService.deleteStep(this.step).then(step => {
         this.onDeleteStep.emit(step);
         this.onClose();
-      });
+      }).catch(error => {});
     }
   }
 
@@ -66,13 +66,13 @@ export class StepComponent {
   private saveUpdatedStep() {
     return this.strategicPlanService.updateStep(this.step).then(step => {
       this.step = step;
-    });
+    }).catch(error => {});
   }
 
   private saveNewStep() {
     console.log(JSON.stringify(this.step));
     return this.strategicPlanService.createStep(this.step).then(step => {
       this.step = step;
-    });
+    }).catch(error => {});
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import 'rxjs/add/operator/toPromise';
 import { Plan } from '../strategic-plan/plan';
 import { Step } from '../step/step';
@@ -9,7 +10,7 @@ import { Step } from '../step/step';
 export class StrategicPlanService {
   private apiEndpoint = '/api/plans';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router, private authService: AuthService) { }
 
   getPlans() {
     const headers = this.getStandardHeaders();
@@ -19,7 +20,7 @@ export class StrategicPlanService {
                .then(response => {
                  console.log(response);
                  return response.json() as Plan[];
-               }).catch(this.handleError);
+               }).catch(this.handleError.bind(this));
   }
 
   getPlan(id: string) {
@@ -29,7 +30,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   createPlan() {
@@ -40,7 +41,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   updatePlan(plan: Plan) {
@@ -50,7 +51,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   deletePlan(plan: Plan) {
@@ -60,7 +61,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Plan;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   createStep(step: Step) {
@@ -70,7 +71,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Step;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   updateStep(step: Step) {
@@ -80,7 +81,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Step;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   deleteStep(step: Step) {
@@ -90,7 +91,7 @@ export class StrategicPlanService {
                .toPromise()
                .then(response => {
                  return response.json() as Step;
-               });
+               }).catch(this.handleError.bind(this));
   }
 
   private getStandardHeaders() {
@@ -103,7 +104,13 @@ export class StrategicPlanService {
   }
 
   private handleError(error: any) {
-    console.error('An error occurred', error);
+    if (error.status === 401) {
+      this.authService.logout();
+      this.router.navigate(['/login']);
+    } else {
+      console.error('An error occurred', error);
+    }
+
     return Promise.reject(error.message || error);
   }
 }
