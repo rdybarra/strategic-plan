@@ -6,6 +6,14 @@ $maxEditingWidth: 37.5em;
     display: block;
 }
 
+$medium-width: 1000px;
+
+@mixin medium-screen {
+  @media (max-width: #{$medium-width}) {
+    @content;
+  }
+}
+
 .step__title {
     text-align: center;
     cursor: pointer;
@@ -46,6 +54,17 @@ $maxEditingWidth: 37.5em;
         text-align: center;
         padding-top: 2em;
         text-align: center;
+    }
+
+    @include medium-screen {
+        min-height: 100px;
+        height: 9em;
+        border-bottom: 5px solid #DDDABE;
+        border-radius: 10px;
+
+        .step__detail__banner {
+            padding-top: 0.6em;
+        }
     }
 }
 
@@ -98,6 +117,11 @@ $maxEditingWidth: 37.5em;
     z-index: 9;
     color: #ffffff;
 
+    @include medium-screen {
+        padding: 1em;
+        width: calc(100% - 2em);
+        height: calc(100vh - 2em);
+    }
 
    .view__controls {
         position: fixed;
